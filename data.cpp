@@ -1,12 +1,14 @@
 #include "data.h"
-//此处记得在调用之前将y1和x1的对应容器元素重新设置为7的大小
+//此处添加了检查QString是否为空，来决定是否录入数据，同时保证了数据的有序性
 Data::Data(QVector<QString> &m1, QVector<QString> &n1)
 {
-    for(int i = 0;i < x.size();i++){
-        x.append(m1[i].toDouble(&ok));
+    for(int i = 0;i < m1.size();i++){
+        if(m1[i] != NULL)
+            x.push_back(m1[i].toDouble(&ok));
     }
     for(int i = 0;i < n1.size();i++){
-        y.append(n1[i].toDouble(&ok));
+        if(n1[i] !=NULL)
+            y.push_back(n1[i].toDouble(&ok));
     }
 }
 
