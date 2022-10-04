@@ -277,15 +277,16 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     //接下来是将Data混合成DataVec，最后输出数据
     //注意建立DataVec的对象时，要根据Data有无实质内容进行筛选，不能直接建立
     DataVec dvlsm(&Dy1p);
-    if((Dy1r.x[0]!=NULL)&&(Dy2p.x[0]!=NULL)&&(Dy2r.x[0]!=NULL)&&(Dy3p.x[0]!=NULL)&&(Dy3r.x[0]!=NULL)){
+    //在测试时发现删除某列第一行并不能让这列全部失效，这是因为Data对象的创建中，会忽略不匹配成对，而原第1行的数字会被第2行的数字对替代
+    if((Dy1r.y[0]!=NULL)&&(Dy2p.y[0]!=NULL)&&(Dy2r.y[0]!=NULL)&&(Dy3p.y[0]!=NULL)&&(Dy3r.y[0]!=NULL)){
         DataVec dv(&Dy1p, &Dy1r, &Dy2p, &Dy2r, &Dy3p, &Dy3r);
         dvlsm = dv;
     }
-    else if((Dy1r.x[0]!=NULL)&&(Dy2p.x[0]!=NULL)&&(Dy2r.x[0]!=NULL)){
+    else if((Dy1r.y[0]!=NULL)&&(Dy2p.y[0]!=NULL)&&(Dy2r.y[0]!=NULL)){
         DataVec dv(&Dy1p, &Dy1r, &Dy2p, &Dy2r);
         dvlsm = dv;
     }
-    else if(Dy1r.x[0]!=NULL){
+    else if(Dy1r.y[0]!=NULL){
         DataVec dv(&Dy1p, &Dy1r);
         dvlsm = dv;
     }
