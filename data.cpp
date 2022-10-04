@@ -1,6 +1,6 @@
 #include "data.h"
 //此处添加了检查QString是否为空，来决定是否录入数据，同时保证了数据的有序性
-Data::Data(QVector<QString> &m1, QVector<QString> &n1)
+Data::Data(QVector<QString> &m1, QVector<QString> &n1)                              //proved
 {
     for(int i = 0;i < m1.size() && i < n1.size();i++){
         if(m1[i] != NULL && n1[i] != NULL){
@@ -14,18 +14,28 @@ Data::Data(QVector<QString> &m1, QVector<QString> &n1)
     }*/
     //此处注释掉，保证成对录入数据
 }
-int Data::pairs(){
+int Data::pairs(){                                                                  //proved
     return x.size();
 }
 
-double Data::sumx(){
+double Data::max_x()                                                                //proved
+{
+    double max = x[x.size() - 1];
+    for(int i = x.size() - 1;i = 0;i--){
+        if(max < x[i])
+            max = x[i];
+    }
+    return max;
+}
+
+double Data::sumx(){                                                                //proved
     double sum = 0;
     for(int i = 0;i < x.size();i++){
         sum += x[i];
     }
     return sum;
 }
-double Data::sumy(){
+double Data::sumy(){                                                                //proved
     double sum = 0;
     for(int i = 0;i < y.size();i++){
         sum += y[i];
@@ -33,28 +43,28 @@ double Data::sumy(){
     return sum;
 }
 
-double Data::avex(){
+double Data::avex(){                                                                //unused
     return sumx()/x.size();
 }
-double Data::avey(){
+double Data::avey(){                                                                //unused
     return sumy()/y.size();
 }
 
-double Data::sumx_2(){
+double Data::sumx_2(){                                                              //proved
     double sum = 0;
     for(int i = 0;i < x.size();i++){
         sum += x[i] * x[i];
     }
     return sum;
 }
-double Data::sumy_2(){
+double Data::sumy_2(){                                                              //proved
     double sum = 0;
     for(int i = 0;i < y.size();i++){
         sum += y[i] * y[i];
     }
     return sum;
 }
-double Data::sumxy(){
+double Data::sumxy(){                                                               //proved
     double sum = 0;
     for(int i = 0;i <x.size();i++){
         sum += x[i] * y[i];
@@ -62,13 +72,13 @@ double Data::sumxy(){
     return sum;
 }
 
-double Data::a_sumx_2(){
+double Data::a_sumx_2(){                                                            //unused
     return sumx_2()/x.size();
 }
-double Data::a_sumy_2(){
+double Data::a_sumy_2(){                                                            //unused
     return sumy_2()/y.size();
 }
-DataVec::DataVec()
+DataVec::DataVec()                                                                  //won't be used
 {
     d1p = nullptr;
     d2p = nullptr;
@@ -78,7 +88,7 @@ DataVec::DataVec()
     d3r = nullptr;
 }
 
-DataVec::DataVec(Data *a1p){
+DataVec::DataVec(Data *a1p){                                                        //proved
     d1p = a1p;
     d2p = nullptr;
     d3p = nullptr;
@@ -86,7 +96,7 @@ DataVec::DataVec(Data *a1p){
     d2r = nullptr;
     d3r = nullptr;
 }//测试用
-DataVec::DataVec(Data *a1p, Data *a1r){
+DataVec::DataVec(Data *a1p, Data *a1r){                                             //proved
     d1p = a1p;
     d1r = a1r;
     d2p = nullptr;
@@ -94,7 +104,7 @@ DataVec::DataVec(Data *a1p, Data *a1r){
     d3p = nullptr;
     d3r = nullptr;
 }
-DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r){
+DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r){                       //proved
     d1p = a1p;
     d1r = a1r;
     d2p = a2p;
@@ -102,7 +112,7 @@ DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r){
     d3p = nullptr;
     d3r = nullptr;
 }
-DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r, Data *a3p, Data *a3r)
+DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r, Data *a3p, Data *a3r)  //proved
 {
     d1p = a1p;
     d2p = a2p;
@@ -112,7 +122,7 @@ DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r, Data *a3p, Data *a3
     d3r = a3r;
 }
 
-DataVec::DataVec(DataVec &dv1)
+DataVec::DataVec(DataVec &dv1)                                                      //proved
 {
     d1p = dv1.d1p;
     d2p = dv1.d2p;
@@ -122,7 +132,7 @@ DataVec::DataVec(DataVec &dv1)
     d3r = dv1.d3r;
 }
 
-DataVec DataVec::operator=(DataVec &dv2)
+DataVec DataVec::operator=(DataVec &dv2)                                            //proved
 {
     d1p = dv2.d1p;
     d2p = dv2.d2p;
@@ -130,8 +140,14 @@ DataVec DataVec::operator=(DataVec &dv2)
     d1r = dv2.d1r;
     d2r = dv2.d2r;
     d3r = dv2.d3r;
+    return *this;
 }
-void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，所以有4个元素位置
+
+double DataVec::fullScale(double &b1)                                               //proved
+{
+    return d1p->max_x() * b1 ;
+}
+void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，所以有4个元素位置  //proved
     b[0] = d1p->sumx_2();//存储x²值的和
     b[1] = d1p->sumxy();//存储y²值的和
     b[2] = d1p->sumx();//存储x的值的和
@@ -177,6 +193,4 @@ void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，�
     b[1] = (b[1] - pairsofAll * b[2] * b[3])/(b[0] - pairsofAll * b[2] * b[2]);
     b[0] = b[3] - b[1] * b[2];
 }
-double DataVec::Line(double &b0, double &b1){
-    ;
-}
+

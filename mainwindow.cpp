@@ -294,5 +294,7 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     qDebug()<<bs;
     ui->lineEditLsmB0->setText(QString::number(bs[0], 'e', 3));
     ui->lineEditLsmB1->setText(QString::number(bs[1], 'e', 3));
+    qDebug()<<QString::number(dvlsm.fullScale(bs[1]), 'g', 3);
+    ui->lineEditLsmFS->setText(QString::number(dvlsm.fullScale(bs[1]), 'g', 3));
 }
 

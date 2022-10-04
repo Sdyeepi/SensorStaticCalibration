@@ -11,6 +11,7 @@ public:
     bool ok;
     Data(QVector<QString> &m1, QVector<QString> &n1);
     int pairs();//返回x，y两个容器的单个的元素个数
+    double max_x();
     double sumy();
     double sumx();
     double avey();//平均数y
@@ -37,7 +38,9 @@ public:
     DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r, Data *a3p, Data *a3r);
     DataVec(DataVec &dv1);
     DataVec operator=(DataVec &dv2);
-    double Line(double &b0, double &b1); //线性度Linearity,理想线性输入y=b0+b1x;
+    double fullScale(double &b1);//y=b0+b1*x，只需要斜率
+    double deltaLmax(double &b0, double &b1);//同上，最大偏差的求法
+    double Line(double &b0, double &b1); //线性度Linearity,理想线性输入y=b0+b1*x;
     double stdDeviaD();//正行程的标准偏差
     double stdDeviaI();//反行程的标准偏差
     double Hyster(); //迟滞性Hysteresis
