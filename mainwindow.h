@@ -5,6 +5,8 @@
 #include <QVector>
 #include <QString>
 #include <QDebug>
+#include "data.h"
+#include <QPointF>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -92,6 +94,7 @@ private:
     QVector<QString> y1r;
     QVector<QString> y2r;
     QVector<QString> y3r;
+    QVector<double> bs;
 };
 
 

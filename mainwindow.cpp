@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     y1r.resize(8);
     y2r.resize(8);
     y3r.resize(8);
+    bs.resize(4);//储存lsm 12以及bip 34的4个b参数
 }
 
 MainWindow::~MainWindow()
@@ -258,9 +259,24 @@ void MainWindow::on_lineEdit87_textChanged(const QString &arg1)
     y3r[7] = ui->lineEdit87->text();
 }
 
-//由于目前列数为7，所以resize(7)
-void MainWindow::on_pBtnUpdate_clicked()
+
+void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
 {
     qDebug()<<x<<y1p<<y2p<<y3p<<y1r<<y2r<<y3r;
+    Data Dy1p(x, y1p);
+    Data Dy2p(x, y2p);
+    Data Dy3p(x, y3p);
+    Data Dy1r(x, y1r);
+    Data Dy2r(x, y2r);
+    Data Dy3r(x, y3r);
+    qDebug()<<Dy1p.x<<Dy2p.x<<Dy3p.x<<Dy1r.x<<Dy2r.x<<Dy3r.x;
+    qDebug()<<Dy1p.y<<Dy2p.y<<Dy3p.y<<Dy1r.y<<Dy2r.y<<Dy3r.y;
+    /*qDebug()<<Dy1p.ok<<Dy2p.ok<<Dy3p.ok<<Dy1r.ok<<Dy2r.ok<<Dy3r.ok;
+    qDebug()<<Dy1p.x<<Dy2p.x<<Dy3p.x<<Dy1r.x<<Dy2r.x<<Dy3r.x;
+    qDebug()<<Dy1p.a_sumx_2()<<Dy2p.a_sumx_2()<<Dy3p.a_sumx_2()<<Dy1r.a_sumx_2()<<Dy2r.a_sumx_2()<<Dy3r.a_sumx_2();*/
+    //接下来是将Data混合成DataVec，最后输出数据
+    DataVec dvlsm(&Dy1p);//有效
+    dvlsm.Lsm(bs);
+    qDebug()<<bs;
 }
 
