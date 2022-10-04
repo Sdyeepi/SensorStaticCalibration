@@ -21,7 +21,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//采用了vector的insert方法，目前为7，故最后应将vector的第7个以后（不含7）的元素删除
+//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit11_textEdited(const QString &arg1)
 {
     x[0] = ui->lineEdit11->text();
@@ -55,7 +55,7 @@ void MainWindow::on_lineEdit81_textEdited(const QString &arg1)
     x[7] = ui->lineEdit81->text();
 }
 
-//采用了vector的insert方法，目前为7，故最后应将vector的第7个以后（不含7）的元素删除
+//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit12_textChanged(const QString &arg1)
 {
     y1p[0] = ui->lineEdit12->text();
@@ -89,7 +89,7 @@ void MainWindow::on_lineEdit82_textChanged(const QString &arg1)
     y1p[7] = ui->lineEdit82->text();
 }
 
-//采用了vector的insert方法，目前为7，故最后应将vector的第7个以后（不含7）的元素删除
+//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit13_textChanged(const QString &arg1)
 {
     y1r[0] = ui->lineEdit13->text();
@@ -123,7 +123,7 @@ void MainWindow::on_lineEdit83_textChanged(const QString &arg1)
     y1r[7] = ui->lineEdit83->text();
 }
 
-//采用了vector的insert方法，目前为7，故最后应将vector的第7个以后（不含7）的元素删除
+//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit14_textChanged(const QString &arg1)
 {
     y2p[0] = ui->lineEdit14->text();
@@ -157,7 +157,7 @@ void MainWindow::on_lineEdit84_textChanged(const QString &arg1)
     y2p[7] = ui->lineEdit84->text();
 }
 
-//采用了vector的insert方法，目前为7，故最后应将vector的第7个以后（不含7）的元素删除
+//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit15_textChanged(const QString &arg1)
 {
     y2r[0] = ui->lineEdit15->text();
@@ -191,7 +191,7 @@ void MainWindow::on_lineEdit85_textChanged(const QString &arg1)
     y2r[7] = ui->lineEdit85->text();
 }
 
-//采用了vector的insert方法，目前为7，故最后应将vector的第7个以后（不含7）的元素删除
+//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit16_textChanged(const QString &arg1)
 {
     y3p[0] = ui->lineEdit16->text();
@@ -225,7 +225,7 @@ void MainWindow::on_lineEdit86_textChanged(const QString &arg1)
     y3p[7] = ui->lineEdit86->text();
 }
 
-//采用了vector的insert方法，目前为7，故最后应将vector的第7个以后（不含7）的元素删除
+//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit17_textChanged(const QString &arg1)
 {
     y3r[0] = ui->lineEdit17->text();
@@ -275,8 +275,24 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     qDebug()<<Dy1p.x<<Dy2p.x<<Dy3p.x<<Dy1r.x<<Dy2r.x<<Dy3r.x;
     qDebug()<<Dy1p.a_sumx_2()<<Dy2p.a_sumx_2()<<Dy3p.a_sumx_2()<<Dy1r.a_sumx_2()<<Dy2r.a_sumx_2()<<Dy3r.a_sumx_2();*/
     //接下来是将Data混合成DataVec，最后输出数据
-    DataVec dvlsm(&Dy1p);//有效
+    //注意建立DataVec的对象时，要根据Data有无实质内容进行筛选，不能直接建立
+    DataVec dvlsm(&Dy1p);
+    if((Dy1r.x[0]!=NULL)&&(Dy2p.x[0]!=NULL)&&(Dy2r.x[0]!=NULL)&&(Dy3p.x[0]!=NULL)&&(Dy3r.x[0]!=NULL)){
+        DataVec dv(&Dy1p, &Dy1r, &Dy2p, &Dy2r, &Dy3p, &Dy3r);
+        dvlsm = dv;
+    }
+    else if((Dy1r.x[0]!=NULL)&&(Dy2p.x[0]!=NULL)&&(Dy2r.x[0]!=NULL)){
+        DataVec dv(&Dy1p, &Dy1r, &Dy2p, &Dy2r);
+        dvlsm = dv;
+    }
+    else if(Dy1r.x[0]!=NULL){
+        DataVec dv(&Dy1p, &Dy1r);
+        dvlsm = dv;
+    }
+    //有效
     dvlsm.Lsm(bs);
     qDebug()<<bs;
+    ui->lineEditLsmB0->setText(QString::number(bs[0], 'e', 3));
+    ui->lineEditLsmB1->setText(QString::number(bs[1], 'e', 3));
 }
 
