@@ -30,7 +30,10 @@ public:
     Data *d2r;
     Data *d3p;
     Data *d3r;
-    DataVec(Data *a1p, Data *a2p=nullptr, Data *a3p=nullptr, Data *a1r=nullptr, Data *a2r=nullptr, Data *a3r=nullptr);
+    DataVec(Data *a1p);
+    DataVec(Data *a1p, Data *a1r);
+    DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r);
+    DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r, Data *a3p, Data *a3r);
     double Line(double &b0, double &b1); //线性度Linearity,理想线性输入y=b0+b1x;
     double stdDeviaD();//正行程的标准偏差
     double stdDeviaI();//反行程的标准偏差

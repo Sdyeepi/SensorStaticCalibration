@@ -68,25 +68,38 @@ double Data::a_sumx_2(){
 double Data::a_sumy_2(){
     return sumy_2()/y.size();
 }
-
-DataVec::DataVec(Data *a1p, Data *a2p, Data *a3p, Data *a1r, Data *a2r, Data *a3r)
-{
+DataVec::DataVec(Data *a1p){
     d1p = a1p;
     d2p = nullptr;
     d3p = nullptr;
     d1r = nullptr;
     d2r = nullptr;
     d3r = nullptr;
-    if(a2p != nullptr)
-        d2p = a2p;
-    if(a3p != nullptr)
-        d3p = a3p;
-    if(a1r != nullptr)
-        d1r = a1r;
-    if(a2r != nullptr)
-        d2r = a2r;
-    if(a3r != nullptr)
-        d3r = a3r;
+}//测试用
+DataVec::DataVec(Data *a1p, Data *a1r){
+    d1p = a1p;
+    d1r = a1r;
+    d2p = nullptr;
+    d2r = nullptr;
+    d3p = nullptr;
+    d3r = nullptr;
+}
+DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r){
+    d1p = a1p;
+    d1r = a1r;
+    d2p = a2p;
+    d2r = a2r;
+    d3p = nullptr;
+    d3r = nullptr;
+}
+DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r, Data *a3p, Data *a3r)
+{
+    d1p = a1p;
+    d2p = a2p;
+    d3p = a3p;
+    d1r = a1r;
+    d2r = a2r;
+    d3r = a3r;
 }
 void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，所以有4个元素位置
     b[0] = d1p->sumx_2();//存储x²值的和
