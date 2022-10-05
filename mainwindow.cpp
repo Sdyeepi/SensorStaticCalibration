@@ -269,11 +269,6 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     Data Dy1r(x, y1r);
     Data Dy2r(x, y2r);
     Data Dy3r(x, y3r);
-    qDebug()<<Dy1p.x<<Dy2p.x<<Dy3p.x<<Dy1r.x<<Dy2r.x<<Dy3r.x;
-    qDebug()<<Dy1p.y<<Dy2p.y<<Dy3p.y<<Dy1r.y<<Dy2r.y<<Dy3r.y;
-    /*qDebug()<<Dy1p.ok<<Dy2p.ok<<Dy3p.ok<<Dy1r.ok<<Dy2r.ok<<Dy3r.ok;
-    qDebug()<<Dy1p.x<<Dy2p.x<<Dy3p.x<<Dy1r.x<<Dy2r.x<<Dy3r.x;
-    qDebug()<<Dy1p.a_sumx_2()<<Dy2p.a_sumx_2()<<Dy3p.a_sumx_2()<<Dy1r.a_sumx_2()<<Dy2r.a_sumx_2()<<Dy3r.a_sumx_2();*/
     //接下来是将Data混合成DataVec，最后输出数据
     //注意建立DataVec的对象时，要根据Data有无实质内容进行筛选，不能直接建立
     DataVec dvlsm(&Dy1p);
@@ -295,7 +290,8 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     qDebug()<<bs;
     ui->lineEditLsmB0->setText(QString::number(bs[0], 'e', 3));
     ui->lineEditLsmB1->setText(QString::number(bs[1], 'e', 3));
-    qDebug()<<QString::number(dvlsm.fullScale(bs[1]), 'g', 3);
     ui->lineEditLsmFS->setText(QString::number(dvlsm.fullScale(bs[1]), 'g', 3));
+    ui->lineEditLsmLine->setText(QString::number(dvlsm.Line(bs[0], bs[1]), 'g', 3));
+    ui->lineEditLsmHysteria->setText(QString::number(dvlsm.Hyster(bs[1]), 'g', 3));
 }
 

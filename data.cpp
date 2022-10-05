@@ -147,6 +147,104 @@ double DataVec::fullScale(double &b1)                                           
 {
     return d1p->max_x() * b1 ;
 }
+
+double DataVec::predict_y(double &b0, double &b1, double x)
+{
+    return b0 + b1 * x;
+}
+
+double DataVec::deltaLmax(double &b0, double &b1)                                   //proved,算法待证实
+{
+    double delta1 = d1p->y[0] - predict_y(b0, b1, d1p->x[0]);
+    double delta2 = predict_y(b0, b1, d1p->x[0]) - d1p->y[0];
+    for(int i = 1;i < d1p->y.size();i++){
+        if(delta1 < (d1p->y[i] - predict_y(b0, b1, d1p->x[i])))
+            delta1 = d1p->y[i] - predict_y(b0, b1, d1p->x[i]);
+        if(delta2 < (predict_y(b0, b1, d1p->x[i]) - d1p->y[i]))
+            delta2 = predict_y(b0, b1, d1p->x[i]) - d1p->y[i];
+    }
+    if(d1r != nullptr){
+        for(int i = 0;i < d1r->y.size();i++){
+            if(delta1 < (d1r->y[i] - predict_y(b0, b1, d1r->x[i])))
+                delta1 = d1r->y[i] - predict_y(b0, b1, d1r->x[i]);
+            if(delta2 < (predict_y(b0, b1, d1r->x[i]) - d1r->y[i]))
+                delta2 = predict_y(b0, b1, d1r->x[i]) - d1r->y[i];
+        }
+    }
+    if(d2p != nullptr){
+        for(int i = 0;i < d2p->y.size();i++){
+            if(delta1 < (d2p->y[i] - predict_y(b0, b1, d2p->x[i])))
+                delta1 = d2p->y[i] - predict_y(b0, b1, d2p->x[i]);
+            if(delta2 < (predict_y(b0, b1, d2p->x[i]) - d2p->y[i]))
+                delta2 = predict_y(b0, b1, d2p->x[i]) - d2p->y[i];
+        }
+    }
+    if(d2r != nullptr){
+        for(int i = 0;i < d2r->y.size();i++){
+            if(delta1 < (d2r->y[i] - predict_y(b0, b1, d2r->x[i])))
+                delta1 = d2r->y[i] - predict_y(b0, b1, d2r->x[i]);
+            if(delta2 < (predict_y(b0, b1, d2r->x[i]) - d2r->y[i]))
+                delta2 = predict_y(b0, b1, d2r->x[i]) - d2r->y[i];
+        }
+    }
+    if(d3p != nullptr){
+        for(int i = 0;i < d3p->y.size();i++){
+            if(delta1 < (d3p->y[i] - predict_y(b0, b1, d3p->x[i])))
+                delta1 = d3p->y[i] - predict_y(b0, b1, d3p->x[i]);
+            if(delta2 < (predict_y(b0, b1, d3p->x[i]) - d3p->y[i]))
+                delta2 = predict_y(b0, b1, d3p->x[i]) - d3p->y[i];
+        }
+    }
+    if(d3r != nullptr){
+        for(int i = 0;i < d3r->y.size();i++){
+            if(delta1 < (d3r->y[i] - predict_y(b0, b1, d3r->x[i])))
+                delta1 = d3r->y[i] - predict_y(b0, b1, d3r->x[i]);
+            if(delta2 < (predict_y(b0, b1, d3r->x[i]) - d3r->y[i]))
+                delta2 = predict_y(b0, b1, d3r->x[i]) - d3r->y[i];
+        }
+    }
+    delta1 = delta1>delta2?delta1:delta2;
+    return delta1;
+}
+
+double DataVec::Line(double &b0, double &b1)                                        //proved
+{
+    return deltaLmax(b0, b1) / fullScale(b1) * 100;//此处为百分数，已×100
+}
+
+double DataVec::deltaHyster()                                                       //proved 算法待证实
+{
+    double sum[4] = {0, 0, 0, 0};
+    if(d1r != nullptr){
+        for(int i = 0;(i < d1p->y.size()&&(i < d1r->y.size()));i++){
+            if(sum[0] < qAbs(d1p->y[i] - d1r->y[i]))
+                sum[0] = qAbs(d1p->y[i] - d1r->y[i]);
+        }
+        sum[3] += 1;
+    }
+    if((d2p != nullptr)&&(d2r != nullptr)){
+        for(int i = 0;(i < d2p->y.size()&&(i < d2r->y.size()));i++){
+            if(sum[1] < qAbs(d2p->y[i] - d2r->y[i]))
+                sum[1] = qAbs(d2p->y[i] - d2r->y[i]);
+        }
+        sum[3] += 1;
+    }
+    if((d3p != nullptr)&&(d3r != nullptr)){
+        for(int i = 0;(i < d3p->y.size()&&(i < d3r->y.size()));i++){
+            if(sum[2] < qAbs(d3p->y[i] - d3r->y[i]))
+                sum[2] = qAbs(d3p->y[i] - d3r->y[i]);
+        }
+        sum[3] += 1;
+    }
+    if(!sum[3])
+        return 0;
+    return (sum[0] + sum[1] + sum[2]) / sum[3];
+}
+
+double DataVec::Hyster(double &b1)                                                  //proved
+{
+    return deltaHyster() / fullScale(b1) * 100;
+}
 void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，所以有4个元素位置  //proved
     b[0] = d1p->sumx_2();//存储x²值的和
     b[1] = d1p->sumxy();//存储y²值的和

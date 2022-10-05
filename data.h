@@ -10,7 +10,7 @@ public:
     QVector<double> y;
     bool ok;
     Data(QVector<QString> &m1, QVector<QString> &n1);
-    int pairs();//返回x，y两个容器的单个的元素个数
+    int pairs();//返回x，y两个容器的单个的元素个数,即返回容器元素对数
     double max_x();
     double sumy();
     double sumx();
@@ -39,13 +39,15 @@ public:
     DataVec(DataVec &dv1);
     DataVec operator=(DataVec &dv2);
     double fullScale(double &b1);//y=b0+b1*x，只需要斜率
+    double predict_y(double &b0, double &b1, double x);//通过拟合直线和自变量x求出的y的估计值
     double deltaLmax(double &b0, double &b1);//同上，最大偏差的求法
     double Line(double &b0, double &b1); //线性度Linearity,理想线性输入y=b0+b1*x;
     double stdDeviaD();//正行程的标准偏差
     double stdDeviaI();//反行程的标准偏差
-    double Hyster(); //迟滞性Hysteresis
+    double deltaHyster();//最大迟滞误差
+    double Hyster(double &b1); //迟滞性Hysteresis
     double Repeat();//重复性Repeatability，此处会用到stdDeviaD和stdDeviaI以及置信因子K算出的绝对误差
-    int Cnfac();//置信因子Confidence factor，上面将这简称为K
+    int Cnfac(int a=3);//置信因子Confidence factor，上面将这简称为K
     void Lsm(QVector<double> &b);//最小二乘法获取总的最小二乘曲线
     void BiP(QVector<double> &b);//两段点法求的直线
 };
