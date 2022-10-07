@@ -271,6 +271,7 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     Data Dy3r(x, y3r);
     //接下来是将Data混合成DataVec，最后输出数据
     //注意建立DataVec的对象时，要根据Data有无实质内容进行筛选，不能直接建立
+    //必须按顺序填，且保持第一列长于第二列(与data.cpp的getCountsPoints有关，若在其中添加了Data*函数，则可忽略次要求)
     DataVec dvlsm(&Dy1p);
     //在测试时发现删除某列第一行并不能让这列全部失效，这是因为Data对象的创建中，会忽略不匹配成对，而原第1行的数字会被第2行的数字对替代
     if((Dy1r.y[0]!=NULL)&&(Dy2p.y[0]!=NULL)&&(Dy2r.y[0]!=NULL)&&(Dy3p.y[0]!=NULL)&&(Dy3r.y[0]!=NULL)){
