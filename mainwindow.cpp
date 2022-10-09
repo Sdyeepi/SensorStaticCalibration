@@ -294,5 +294,11 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     ui->lineEditLsmFS->setText(QString::number(dvlsm.fullScale(bs[1]), 'g', 3));
     ui->lineEditLsmLine->setText(QString::number(dvlsm.Line(bs[0], bs[1]), 'g', 3));
     ui->lineEditLsmHysteria->setText(QString::number(dvlsm.Hyster(bs[1]), 'g', 3));
+    float k = ui->lineEditK->text().toFloat();
+    qDebug()<<k;
+    if(k)
+        ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(k),'g',3));
+    else ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(),'g',3));
 }
+
 

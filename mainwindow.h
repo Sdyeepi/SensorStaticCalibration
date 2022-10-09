@@ -83,6 +83,7 @@ private slots:
     void on_lineEdit67_textChanged(const QString &arg1);
     void on_lineEdit77_textChanged(const QString &arg1);
     void on_lineEdit87_textChanged(const QString &arg1);
+
     void on_pBtnUpdate_clicked();
 
 private:

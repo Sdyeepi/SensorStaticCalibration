@@ -21,7 +21,7 @@ int Data::pairs(){                                                              
 double Data::max_x()                                                                //proved
 {
     double max = x[x.size() - 1];
-    for(int i = x.size() - 1;i = 0;i--){
+    for(int i = x.size() - 1;i >= 0;i--){
         if(max < x[i])
             max = x[i];
     }
@@ -98,6 +98,7 @@ DataVec::DataVec(Data *a1p){                                                    
     d2r = nullptr;
     d3r = nullptr;
     points.resize(d1p->pairs());
+    points.push_back(d1p->pairs());
     QPoints.resize(1);
     for(int i = 0;i < d1p->pairs();i++){
         QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
@@ -110,7 +111,14 @@ DataVec::DataVec(Data *a1p, Data *a1r){                                         
     d2r = nullptr;
     d3p = nullptr;
     d3r = nullptr;
-    points.resize(d1p->pairs()>d1r->pairs()?d1p->pairs():d1r->pairs());
+    Data *dnp = getMaxPairsDNP();
+    Data *dnr = getMaxPairsDNR();
+    if(dnr != d1p){
+        points.resize(dnp->pairs() + dnr->pairs());
+        points.push_back(dnr->pairs());
+    }
+    else points.resize(dnp->pairs());
+    points.push_back(dnp->pairs());
     QPoints.resize(2);
     for(int i = 0;i < d1p->pairs();i++){
         QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
@@ -124,11 +132,14 @@ DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r){                   
     d2r = a2r;
     d3p = nullptr;
     d3r = nullptr;
-    double a = d1p->pairs();
-    a = a>d1r->pairs()?a:d1r->pairs();
-    a = a>d2p->pairs()?a:d2p->pairs();
-    a = a>d2r->pairs()?a:d2r->pairs();
-    points.resize(a);
+    Data *dnp = getMaxPairsDNP();
+    Data *dnr = getMaxPairsDNR();
+    if(dnr != d1p){
+        points.resize(dnp->pairs() + dnr->pairs());
+            points.push_back(dnr->pairs());
+    }
+    else points.resize(dnp->pairs());
+    points.push_back(dnp->pairs());
     QPoints.resize(4);
     for(int i = 0;i < d1p->pairs();i++){
         QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
@@ -145,13 +156,14 @@ DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r, Data *a3p, Data *a3
     d1r = a1r;
     d2r = a2r;
     d3r = a3r;
-    double a = d1p->pairs();
-    a = a>d1r->pairs()?a:d1r->pairs();
-    a = a>d2p->pairs()?a:d2p->pairs();
-    a = a>d2r->pairs()?a:d2r->pairs();
-    a = a>d3r->pairs()?a:d3r->pairs();
-    a = a>d3p->pairs()?a:d3p->pairs();
-    points.resize(a);
+    Data *dnp = getMaxPairsDNP();
+    Data *dnr = getMaxPairsDNR();
+    if(dnr != d1p){
+        points.resize(dnp->pairs() + dnr->pairs());
+        points.push_back(dnr->pairs());
+    }
+    else points.resize(dnp->pairs());
+    points.push_back(dnp->pairs());
     QPoints.resize(6);
     for(int i = 0;i < d1p->pairs();i++){
         QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
@@ -257,124 +269,173 @@ double DataVec::Line(double &b0, double &b1)                                    
     return deltaLmax(b0, b1) / fullScale(b1) * 100;//此处为百分数，已×100
 }
 
-Data *DataVec::getMaxPairsDNX()
+Data *DataVec::getMaxPairsDNP()
 {
-    if(d1r!=nullptr&&d2p!=nullptr&&d2r!=nullptr&&d3p!=nullptr&&d3r!=nullptr){
-        if(d1p->pairs()>d1r->pairs()&&d1p->pairs()>d2p->pairs()&&d1p->pairs()>d2r->pairs()&&d1p->pairs()>d3p->pairs()&&d1p->pairs()>d3r->pairs())
-            return d1p;
-        else if(d1r->pairs()>d1p->pairs()&&d1r->pairs()>d2p->pairs()&&d1r->pairs()>d2r->pairs()&&d1r->pairs()>d3p->pairs()&&d1r->pairs()>d3r->pairs())
-            return d1r;
-        else if(d2p->pairs()>d1p->pairs()&&d2p->pairs()>d1r->pairs()&&d2p->pairs()>d2r->pairs()&&d2p->pairs()>d3p->pairs()&&d2p->pairs()>d3r->pairs())
-            return d2p;
-        else if(d2r->pairs()>d1p->pairs()&&d2r->pairs()>d1r->pairs()&&d2r->pairs()>d2p->pairs()&&d2r->pairs()>d3p->pairs()&&d2r->pairs()>d3r->pairs())
-            return d2r;
-        else if(d3p->pairs()>d1p->pairs()&&d3p->pairs()>d1r->pairs()&&d3p->pairs()>d2p->pairs()&&d3p->pairs()>d2r->pairs()&&d3p->pairs()>d3r->pairs())
-            return d3p;
-        else return d3r;
-    }
-    else if(d1r!=nullptr&&d2p!=nullptr&&d2r!=nullptr&&d3p!=nullptr){
-        if(d1p->pairs()>d1r->pairs()&&d1p->pairs()>d2p->pairs()&&d1p->pairs()>d2r->pairs()&&d1p->pairs()>d3p->pairs())
-            return d1p;
-        else if(d1r->pairs()>d1p->pairs()&&d1r->pairs()>d2p->pairs()&&d1r->pairs()>d2r->pairs()&&d1r->pairs()>d3p->pairs())
-            return d1r;
-        else if(d2p->pairs()>d1p->pairs()&&d2p->pairs()>d1r->pairs()&&d2p->pairs()>d2r->pairs()&&d1p->pairs()>d3p->pairs())
-            return d2p;
-        else if(d2r->pairs()>d1p->pairs()&&d2r->pairs()>d1r->pairs()&&d2r->pairs()>d2p->pairs()&&d2r->pairs()>d3p->pairs())
-            return d2r;
-        else return d3p;
-    }
-    else if(d1r!=nullptr&&d2p!=nullptr&&d2r!=nullptr){
-        if(d1p->pairs()>d1r->pairs()&&d1p->pairs()>d2p->pairs()&&d1p->pairs()>d2r->pairs())
-            return d1p;
-        else if(d1r->pairs()>d1p->pairs()&&d1r->pairs()>d2p->pairs()&&d1r->pairs()>d2r->pairs())
-            return d1r;
-        else if(d2p->pairs()>d1p->pairs()&&d2p->pairs()>d1r->pairs()&&d2p->pairs()>d2r->pairs())
-            return d2p;
-        else return d2r;
-    }
-    else if(d1r!=nullptr&&d2p!=nullptr){
-        if(d1p->pairs()>d1r->pairs()&&d1p->pairs()>d2p->pairs())
-            return d1p;
-        else if(d1r->pairs()>d1p->pairs()&&d1r->pairs()>d2p->pairs())
-            return d1r;
-        else return d2p;
-    }
-    else if(d1r!=nullptr){
-        if(d1p->pairs()>d1r->pairs())
-            return d1p;
-        else return d1r;
-    }
+    if(d1p!=nullptr&&d2p!=nullptr&&d3p!=nullptr){
+            if(d1p->pairs()>d2p->pairs()&&d1p->pairs()>d3p->pairs())
+                return d1p;
+            else if(d2p->pairs()>d1p->pairs()&&d2p->pairs()>d3p->pairs())
+                return d2p;
+            else return d3p;
+        }
+    else if(d1p!=nullptr&&d2p!=nullptr){
+            if(d1p->pairs()>d2p->pairs())
+                return d1p;
+            else return d2p;
+        }
     else return d1p;
 }
 
-void DataVec::getCountsPoints()
+Data *DataVec::getMaxPairsDNR()
+{
+    if(d1r!=nullptr&&d2r!=nullptr&&d3r!=nullptr){
+            if(d1r->pairs()>d2r->pairs()&&d1r->pairs()>d3r->pairs())
+                return d1r;
+            else if(d2r->pairs()>d1r->pairs()&&d2r->pairs()>d3r->pairs())
+                return d2r;
+            else return d3r;
+        }
+    else if(d1r!=nullptr&&d2r!=nullptr){
+            if(d1r->pairs()>d2r->pairs())
+                return d1r;
+            else return d2r;
+        }
+    else if (d1r!=nullptr)
+        return d1r;//此处用函数记得检验d1r是否为空
+    return d1p;
+}
+
+double DataVec::getCountsPoints()                   //存在野指针
 {
     //计算各x定义标定点的循环次数，以d1p的x为基础定点，所以要求为第一列正行程必须为覆盖全自变量x的完整队列
     //否则将引入较麻烦的算法实现
     //以下是d1p x的定点算法，设想中关于解决这要求的算法是选择出行数最多的dnx列(2022.10.07 22:30,还未改算法，需要用到Data*getMaxPairsDNX())
-    Data *dnx = getMaxPairsDNX();
-    for(int i = 0;i < dnx->pairs();i++){
-        if(dnx!=d1p)
+    Data *dnp = getMaxPairsDNP();
+    Data *dnr = getMaxPairsDNR();
+    int a = dnp->pairs();
+    int b = dnr->pairs();
+    QVector<double> sump(a,0);
+    QVector<double> sumr(b,0);
+    QVector<double> pNum1(a, 0);
+    QVector<double> pNum2(a, 0);
+    QVector<double> pNum3(a, 0);
+    QVector<double> rNum1(b, 0);
+    QVector<double> rNum2(b, 0);
+    QVector<double> rNum3(b, 0);
+    QVector<double> pDevia(a, 0);
+    QVector<double> rDevia(b, 0);
+    double stdp = 0;
+    double stdr = 0;
+    double stD4All = 0;
+    for(int i = 0;i < a;i++){
+        if(d1p != nullptr)
         {
             for(int j = 0;j < d1p->pairs();j++){
-                if(dnx->x[i]==d1p->x[j]){
+                if(dnp->x[i]==d1p->x[j]){
                     points[i]++;
+                    sump[i] += d1p->y[j];
+                    pNum1[i] = d1p->y[j];
                     break;
                 }
             }
         }
-        if(d1r != nullptr && dnx != d1r)
-        {
-            for(int j = 0;j < d1r->pairs();j++){
-                if(dnx->x[i]==d1r->x[j]){
-                    points[i]++;
-                    break;
-                }
-            }
-        }
-        if(d2p != nullptr && dnx != d2p)
+        if(d2p != nullptr)
         {
             for(int j = 0;j < d2p->pairs();j++){
-                if(d1p->x[i]==d2p->x[j]){
+                if(dnp->x[i]==d2p->x[j]){
                     points[i]++;
+                    sump[i] += d2p->y[j];
+                    pNum2[i] = d2p->y[j];
                     break;
                 }
             }
         }
-        if(d2r != nullptr && dnx != d2r)
-        {
-            for(int j = 0;j < d2r->pairs();j++){
-                if(d1p->x[i]==d2r->x[j]){
-                    points[i]++;
-                    break;
-                }
-            }
-        }
-        if(d3p != nullptr && dnx != d3p)
+        if(d3p != nullptr)
         {
             for(int j = 0;j < d3p->pairs();j++){
-                if(d1p->x[i]==d3p->x[j]){
+                if(dnp->x[i]==d3p->x[j]){
                     points[i]++;
+                    sump[i] += d3p->y[j];
+                    pNum3[i] = d3p->y[j];
                     break;
                 }
             }
         }
-        if(d3r != nullptr && dnx != d3r)
-        {
-            for(int j = 0;j < d3r->pairs();j++){
-                if(d1p->x[i]==d3r->x[j]){
-                    points[i]++;
-                    break;
+        sump[i] = sump[i]/points[i];//此处成为相同x下正行程所有y值的平均值
+    }
+    if(dnr != d1p){
+        for(int i = 0;i < b;i++){
+            if(d1r != nullptr)
+            {
+                for(int j = 0;j < d1r->pairs();j++){
+                    if(dnr->x[i]==d1r->x[j]){
+                        points[i + a]++;
+                        sumr[i] += d1r->y[j];
+                        rNum1[i] = d1r->y[j];
+                        break;
+                    }
                 }
             }
+            if(d2r != nullptr)
+            {
+                for(int j = 0;j < d2r->pairs();j++){
+                    if(dnr->x[i]==d2r->x[j]){
+                        points[i + a]++;
+                        sumr[i] += d2r->y[j];
+                        rNum2[i] = d2r->y[j];
+                        break;
+                    }
+                }
+            }
+            if(d3r != nullptr)
+            {
+                for(int j = 0;j < d3r->pairs();j++){
+                    if(dnr->x[i]==d3r->x[j]){
+                        points[i + a]++;
+                        sumr[i] += d3r->y[j];
+                        rNum3[i] = d3r->y[j];
+                        break;
+                    }
+                }
+            }
+            sumr[i] = sumr[i]/points[i];//此处成为相同x下反行程所有y值的平均值
         }
     }
-}
-
-QVector<double> DataVec::stdDeviaD()
-{
-    QVector<double> sum(8, 0);//各点残差平方和,且初始化为0，元素为8个
-
+    //以下是计算残差平方并存入相应的位置
+    for(int i = 0;i < a;i++){
+        if(pNum1[i] != 0)
+            pNum1[i] = (pNum1[i] - sump[i]) * (pNum1[i] - sump[i]);
+        if(pNum2[i] != 0)
+            pNum2[i] = (pNum2[i] - sump[i]) * (pNum2[i] - sump[i]);
+        if(pNum3[i] != 0)
+            pNum3[i] = (pNum3[i] - sump[i]) * (pNum3[i] - sump[i]);
+    }
+    for(int j = 0;j < b;j++){
+        if(rNum1[j] != 0)
+            rNum1[j] = (rNum1[j] - sumr[j]) * (rNum1[j] - sumr[j]);
+        if(rNum1[j] != 0)
+            rNum2[j] = (rNum2[j] - sumr[j]) * (rNum2[j] - sumr[j]);
+        if(rNum1[j] != 0)
+            rNum3[j] = (rNum3[j] - sumr[j]) * (rNum3[j] - sumr[j]);
+    }
+    //以下是残差平方和计算，并存入pDevia，rDevia
+    for(int i = 0;i < a;i++){
+        pDevia[i] += pNum1[i] + pNum2[i] + pNum3[i];
+        pDevia[i] = pDevia[i] / points[i] / (points[i] - 1);                //都是没有求根号的
+    }
+    for(int i = 0;i < b;i++){
+        rDevia[i] += rNum1[i] + rNum2[i] + rNum3[i];
+        rDevia[i] = rDevia[i] / points[i + a] / (points[i + a] - 1);        //都是没有求根号的
+    }
+    //计算最后整个测试过程的标准偏差
+    for(int i = 0;i < a;i++){
+        stdp += pDevia[i];
+    }
+    for(int i = 0;i < b;i++){
+        stdr += rDevia[i];
+    }
+    stD4All = (stdp + stdr) / (a + b);
+    return qSqrt(stD4All);
 }
 
 double DataVec::deltaHyster()                                                       //proved 算法待证实
@@ -424,6 +485,12 @@ double DataVec::Hyster(double &b1)                                              
 {
     return deltaHyster() / fullScale(b1) * 100;
 }
+
+double DataVec::Repeat(int a)
+{
+    return getCountsPoints() * a;
+}
+
 void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，所以有4个元素位置  //proved
     b[0] = d1p->sumx_2();//存储x²值的和
     b[1] = d1p->sumxy();//存储y²值的和

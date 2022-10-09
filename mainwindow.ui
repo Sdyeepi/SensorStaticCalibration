@@ -1040,11 +1040,17 @@
      </item>
      <item row="4" column="2" colspan="3">
       <widget class="QLineEdit" name="lineEditLsmRepeat">
+       <property name="toolTip">
+        <string>当为1组正反行程或没有时，由于贝塞尔公式会显示non</string>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>当为1组正反行程或没有时，由于贝塞尔公式会显示non</string>
        </property>
       </widget>
      </item>
