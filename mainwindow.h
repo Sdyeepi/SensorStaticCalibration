@@ -19,6 +19,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void LsmShow(QVector<double> &b, DataVec &dvlsm);
 
 private slots:
     void on_lineEdit11_textEdited(const QString &arg1);

@@ -21,6 +21,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::LsmShow(QVector<double> &bs, DataVec &dvlsm){
+    dvlsm.Lsm(bs);
+    ui->lineEditLsmB0->setText(QString::number(bs[0], 'e', 3));
+    ui->lineEditLsmB1->setText(QString::number(bs[1], 'e', 3));
+    ui->lineEditLsmFS->setText(QString::number(dvlsm.fullScale(bs[1]), 'g', 3));
+    ui->lineEditLsmLine->setText(QString::number(dvlsm.Line(bs[0], bs[1]), 'g', 3));
+    ui->lineEditLsmHysteria->setText(QString::number(dvlsm.Hyster(bs[1]), 'g', 3));
+    float k = ui->lineEditK->text().toFloat();
+    if(k)
+        ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1],k),'g',3));
+    else ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1]),'g',3));
+}
 //采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit11_textEdited(const QString &arg1)
 {
@@ -262,7 +274,6 @@ void MainWindow::on_lineEdit87_textChanged(const QString &arg1)
 
 void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
 {
-    qDebug()<<x<<y1p<<y2p<<y3p<<y1r<<y2r<<y3r;
     Data Dy1p(x, y1p);
     Data Dy2p(x, y2p);
     Data Dy3p(x, y3p);
@@ -272,33 +283,38 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     //接下来是将Data混合成DataVec，最后输出数据
     //注意建立DataVec的对象时，要根据Data有无实质内容进行筛选，不能直接建立
     //必须按顺序填，且保持第一列长于第二列(与data.cpp的getCountsPoints有关，若在其中添加了Data*函数，则可忽略次要求)
-    DataVec dvlsm(&Dy1p);
+    DataVec dv(&Dy1p);
     //在测试时发现删除某列第一行并不能让这列全部失效，这是因为Data对象的创建中，会忽略不匹配成对，而原第1行的数字会被第2行的数字对替代
     if((Dy1r.y[0]!=NULL)&&(Dy2p.y[0]!=NULL)&&(Dy2r.y[0]!=NULL)&&(Dy3p.y[0]!=NULL)&&(Dy3r.y[0]!=NULL)){
-        DataVec dv(&Dy1p, &Dy1r, &Dy2p, &Dy2r, &Dy3p, &Dy3r);
-        dvlsm = dv;
+        DataVec dv6(&Dy1p, &Dy1r, &Dy2p, &Dy2r, &Dy3p, &Dy3r);
+        dv = dv6;
     }
     else if((Dy1r.y[0]!=NULL)&&(Dy2p.y[0]!=NULL)&&(Dy2r.y[0]!=NULL)){
-        DataVec dv(&Dy1p, &Dy1r, &Dy2p, &Dy2r);
-        dvlsm = dv;
+        DataVec dv4(&Dy1p, &Dy1r, &Dy2p, &Dy2r);
+        dv = dv4;
     }
     else if(Dy1r.y[0]!=NULL){
-        DataVec dv(&Dy1p, &Dy1r);
-        dvlsm = dv;
+        DataVec dv2(&Dy1p, &Dy1r);
+        dv = dv2;
     }
+    //此处应该还得有添加DataVec dv的QPointF点位进入QChartView
     //有效
-    dvlsm.Lsm(bs);
+    /*{
+        dv.Lsm(bs);
+        qDebug()<<bs;
+        ui->lineEditLsmB0->setText(QString::number(bs[0], 'e', 3));
+        ui->lineEditLsmB1->setText(QString::number(bs[1], 'e', 3));
+        ui->lineEditLsmFS->setText(QString::number(dv.fullScale(bs[1]), 'g', 3));
+        ui->lineEditLsmLine->setText(QString::number(dv.Line(bs[0], bs[1]), 'g', 3));
+        ui->lineEditLsmHysteria->setText(QString::number(dv.Hyster(bs[1]), 'g', 3));
+        float k = ui->lineEditK->text().toFloat();
+        qDebug()<<k;
+        if(k)
+            ui->lineEditLsmRepeat->setText(QString::number(dv.Repeat(k),'g',3));
+        else ui->lineEditLsmRepeat->setText(QString::number(dv.Repeat(),'g',3));
+    }*/
+    LsmShow(bs,dv);
     qDebug()<<bs;
-    ui->lineEditLsmB0->setText(QString::number(bs[0], 'e', 3));
-    ui->lineEditLsmB1->setText(QString::number(bs[1], 'e', 3));
-    ui->lineEditLsmFS->setText(QString::number(dvlsm.fullScale(bs[1]), 'g', 3));
-    ui->lineEditLsmLine->setText(QString::number(dvlsm.Line(bs[0], bs[1]), 'g', 3));
-    ui->lineEditLsmHysteria->setText(QString::number(dvlsm.Hyster(bs[1]), 'g', 3));
-    float k = ui->lineEditK->text().toFloat();
-    qDebug()<<k;
-    if(k)
-        ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(k),'g',3));
-    else ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(),'g',3));
 }
 
 

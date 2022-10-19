@@ -28,6 +28,29 @@ double Data::max_x()                                                            
     return max;
 }
 
+double Data::min_x()
+{
+    double min = x[0];
+    for(int i = 0;i < x.size();i++){
+        if(min > x[i])
+            min = x[i];
+    }
+    return min;
+}
+
+double Data::range_x()
+{
+    double max = x[0];
+    double min = x[0];
+    for(int i = 0;i < x.size();i++){
+        if(max < x[i])
+            max = x[i];
+        if(min > x[i])
+            min = x[i];
+    }
+    return max - min;
+}
+
 double Data::sumx(){                                                                //proved
     double sum = 0;
     for(int i = 0;i < x.size();i++){
@@ -200,9 +223,9 @@ DataVec DataVec::operator=(DataVec &dv2)                                        
     return *this;
 }
 
-double DataVec::fullScale(double &b1)                                               //proved
+double DataVec::fullScale(double &b1)                                               //proved,算法需要改，d1p的自变量量程不一定最大
 {
-    return d1p->max_x() * b1 ;
+    return d1p->range_x() * b1 ;
 }
 
 double DataVec::predict_y(double &b0, double &b1, double x)
@@ -210,58 +233,295 @@ double DataVec::predict_y(double &b0, double &b1, double x)
     return b0 + b1 * x;
 }
 
-double DataVec::deltaLmax(double &b0, double &b1)                                   //proved,算法待证实
-{
-    double delta1 = d1p->y[0] - predict_y(b0, b1, d1p->x[0]);
-    double delta2 = predict_y(b0, b1, d1p->x[0]) - d1p->y[0];
-    for(int i = 1;i < d1p->y.size();i++){
-        if(delta1 < (d1p->y[i] - predict_y(b0, b1, d1p->x[i])))
-            delta1 = d1p->y[i] - predict_y(b0, b1, d1p->x[i]);
-        if(delta2 < (predict_y(b0, b1, d1p->x[i]) - d1p->y[i]))
-            delta2 = predict_y(b0, b1, d1p->x[i]) - d1p->y[i];
+double DataVec::deltaLmax2(double &b0, double &b1)                            //proved,此结果不是将三条直线的同一点的平均值与估计值做比较，而是同一x的所有点
+{//由上方注释知道，要去三个数值的平均值，还未改
+    double delta1 = 0;
+    QVector<double> deltas;
+    //计算同一x下的平均值,不考虑过于复杂，直接面对3对正方行程吧
+    for(int i = 0;i < d1p->pairs();i++){
+        deltas.append((d1p->y[i] + d1r->y[i] + d2p->y[i] + d2r->y[i] + d3p->y[i] + d3r->y[i]) / 6);
+        deltas[i] = qAbs(deltas[i] - predict_y(b0, b1, d1p->x[i]));
+    }
+    for(int i = 0;i < deltas.size();i++){
+        delta1 = delta1>deltas[i]?delta1:deltas[i];
+    }
+    return delta1;
+    //原算法
+    /*    for(int i = 0;i < d1p->y.size();i++){
+        if(delta1 < qAbs(d1p->y[i] - predict_y(b0, b1, d1p->x[i])))
+            delta1 = qAbs(d1p->y[i] - predict_y(b0, b1, d1p->x[i]));
     }
     if(d1r != nullptr){
         for(int i = 0;i < d1r->y.size();i++){
-            if(delta1 < (d1r->y[i] - predict_y(b0, b1, d1r->x[i])))
-                delta1 = d1r->y[i] - predict_y(b0, b1, d1r->x[i]);
-            if(delta2 < (predict_y(b0, b1, d1r->x[i]) - d1r->y[i]))
-                delta2 = predict_y(b0, b1, d1r->x[i]) - d1r->y[i];
+            if(delta1 < qAbs(d1r->y[i] - predict_y(b0, b1, d1r->x[i])))
+                delta1 = qAbs(d1r->y[i] - predict_y(b0, b1, d1r->x[i]));
         }
     }
     if(d2p != nullptr){
         for(int i = 0;i < d2p->y.size();i++){
-            if(delta1 < (d2p->y[i] - predict_y(b0, b1, d2p->x[i])))
-                delta1 = d2p->y[i] - predict_y(b0, b1, d2p->x[i]);
-            if(delta2 < (predict_y(b0, b1, d2p->x[i]) - d2p->y[i]))
-                delta2 = predict_y(b0, b1, d2p->x[i]) - d2p->y[i];
+            if(delta1 < qAbs(d2p->y[i] - predict_y(b0, b1, d2p->x[i])))
+                delta1 = qAbs(d2p->y[i] - predict_y(b0, b1, d2p->x[i]));
         }
     }
     if(d2r != nullptr){
         for(int i = 0;i < d2r->y.size();i++){
-            if(delta1 < (d2r->y[i] - predict_y(b0, b1, d2r->x[i])))
-                delta1 = d2r->y[i] - predict_y(b0, b1, d2r->x[i]);
-            if(delta2 < (predict_y(b0, b1, d2r->x[i]) - d2r->y[i]))
-                delta2 = predict_y(b0, b1, d2r->x[i]) - d2r->y[i];
+            if(delta1 < qAbs(d2r->y[i] - predict_y(b0, b1, d2r->x[i])))
+                delta1 = qAbs(d2r->y[i] - predict_y(b0, b1, d2r->x[i]));
         }
     }
     if(d3p != nullptr){
         for(int i = 0;i < d3p->y.size();i++){
-            if(delta1 < (d3p->y[i] - predict_y(b0, b1, d3p->x[i])))
-                delta1 = d3p->y[i] - predict_y(b0, b1, d3p->x[i]);
-            if(delta2 < (predict_y(b0, b1, d3p->x[i]) - d3p->y[i]))
-                delta2 = predict_y(b0, b1, d3p->x[i]) - d3p->y[i];
+            if(delta1 < qAbs(d3p->y[i] - predict_y(b0, b1, d3p->x[i])))
+                delta1 = qAbs(d3p->y[i] - predict_y(b0, b1, d3p->x[i]));
         }
     }
     if(d3r != nullptr){
         for(int i = 0;i < d3r->y.size();i++){
-            if(delta1 < (d3r->y[i] - predict_y(b0, b1, d3r->x[i])))
-                delta1 = d3r->y[i] - predict_y(b0, b1, d3r->x[i]);
-            if(delta2 < (predict_y(b0, b1, d3r->x[i]) - d3r->y[i]))
-                delta2 = predict_y(b0, b1, d3r->x[i]) - d3r->y[i];
+            if(delta1 < qAbs(d3r->y[i] - predict_y(b0, b1, d3r->x[i])))
+                delta1 = qAbs(d3r->y[i] - predict_y(b0, b1, d3r->x[i]));
         }
     }
-    delta1 = delta1>delta2?delta1:delta2;
-    return delta1;
+    return delta1;*/
+
+}
+
+double DataVec::deltaLmax(double &b0, double &b1)
+{
+    QVector<QVector<double>> xyaver(2);
+    Data* dnx = getMaxPairsDNX();
+    if(d1r!=nullptr&&d2p!=nullptr&&d2r!=nullptr&&d3p!=nullptr&&d3r!=nullptr){
+        int counts = 0;
+        xyaver[0] = dnx->x;
+        xyaver[1].resize(dnx->pairs());
+        for(int i = 0; i < dnx->pairs();i++){
+            for(int j = 0; j < d1p->pairs();j++){
+                if(dnx->x[i] == d1p->x[j]){
+                    xyaver[1][i] += d1p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d2p->pairs();j++){
+                if(dnx->x[i] == d2p->x[j]){
+                    xyaver[1][i] += d2p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d3p->pairs();j++){
+                if(dnx->x[i] == d3p->x[j]){
+                    xyaver[1][i] += d3p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d1r->pairs();j++){
+                if(dnx->x[i] == d1r->x[j]){
+                    xyaver[1][i] += d1r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d2r->pairs();j++){
+                if(dnx->x[i] == d2r->x[j]){
+                    xyaver[1][i] += d2r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d3r->pairs();j++){
+                if(dnx->x[i] == d3r->x[j]){
+                    xyaver[1][i] += d3r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            xyaver[1][i] = xyaver[1][i] / counts;
+            counts = 0;
+        }
+        //上面是计算所有列的y的平均值，现在计算各平均值与预测直线的差值
+        for(int i = 0; i < xyaver[1].size();i++){
+            xyaver[1][i] = qAbs(xyaver[1][i] - predict_y(b0, b1, xyaver[0][i]));
+        }
+        //上面的xyaver[1]的所有值已经是原各平均值与预测直线的差值的绝对值，现在求这些绝对值的最大值
+        for(int i = 1; i < xyaver[1].size();i++){
+            xyaver[1][0] = xyaver[1][0]>xyaver[1][i] ? xyaver[1][0] : xyaver[1][i];
+        }
+        return xyaver[1][0];//xyaver[1][0]为用来存储最大值的地方
+    }
+    else if(d1r!=nullptr&&d2p!=nullptr&&d2r!=nullptr&&d3p!=nullptr){
+        int counts = 0;
+        xyaver[0] = dnx->x;
+        xyaver[1].resize(dnx->pairs());
+        for(int i = 0; i < dnx->pairs();i++){
+            for(int j = 0; j < d1p->pairs();j++){
+                if(dnx->x[i] == d1p->x[j]){
+                    xyaver[1][i] += d1p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d2p->pairs();j++){
+                if(dnx->x[i] == d2p->x[j]){
+                    xyaver[1][i] += d2p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d3p->pairs();j++){
+                if(dnx->x[i] == d3p->x[j]){
+                    xyaver[1][i] += d3p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d1r->pairs();j++){
+                if(dnx->x[i] == d1r->x[j]){
+                    xyaver[1][i] += d1r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d2r->pairs();j++){
+                if(dnx->x[i] == d2r->x[j]){
+                    xyaver[1][i] += d2r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            xyaver[1][i] = xyaver[1][i] / counts;
+            counts = 0;
+        }
+        for(int i = 0; i < xyaver[1].size();i++){
+            xyaver[1][i] = qAbs(xyaver[1][i] - predict_y(b0, b1, xyaver[0][i]));
+        }
+        for(int i = 1; i < xyaver[1].size();i++){
+            xyaver[1][0] = xyaver[1][0]>xyaver[1][i] ? xyaver[1][0] : xyaver[1][i];
+        }
+        return xyaver[1][0];
+    }
+    else if(d1r!=nullptr&&d2p!=nullptr&&d2r!=nullptr){
+        int counts = 0;
+        xyaver[0] = dnx->x;
+        xyaver[1].resize(dnx->pairs());
+        for(int i = 0; i < dnx->pairs();i++){
+            for(int j = 0; j < d1p->pairs();j++){
+                if(dnx->x[i] == d1p->x[j]){
+                    xyaver[1][i] += d1p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d2p->pairs();j++){
+                if(dnx->x[i] == d2p->x[j]){
+                    xyaver[1][i] += d2p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d1r->pairs();j++){
+                if(dnx->x[i] == d1r->x[j]){
+                    xyaver[1][i] += d1r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d2r->pairs();j++){
+                if(dnx->x[i] == d2r->x[j]){
+                    xyaver[1][i] += d2r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            xyaver[1][i] = xyaver[1][i] / counts;
+            counts = 0;
+        }
+        for(int i = 0; i < xyaver[1].size();i++){
+            xyaver[1][i] = qAbs(xyaver[1][i] - predict_y(b0, b1, xyaver[0][i]));
+        }
+        for(int i = 1; i < xyaver[1].size();i++){
+            xyaver[1][0] = xyaver[1][0]>xyaver[1][i] ? xyaver[1][0] : xyaver[1][i];
+        }
+        return xyaver[1][0];
+    }
+    else if(d1r!=nullptr&&d2p!=nullptr){
+        int counts = 0;
+        xyaver[0] = dnx->x;
+        xyaver[1].resize(dnx->pairs());
+        for(int i = 0; i < dnx->pairs();i++){
+            for(int j = 0; j < d1p->pairs();j++){
+                if(dnx->x[i] == d1p->x[j]){
+                    xyaver[1][i] += d1p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d2p->pairs();j++){
+                if(dnx->x[i] == d2p->x[j]){
+                    xyaver[1][i] += d2p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d1r->pairs();j++){
+                if(dnx->x[i] == d1r->x[j]){
+                    xyaver[1][i] += d1r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            xyaver[1][i] = xyaver[1][i] / counts;
+            counts = 0;
+        }
+        for(int i = 0; i < xyaver[1].size();i++){
+            xyaver[1][i] = qAbs(xyaver[1][i] - predict_y(b0, b1, xyaver[0][i]));
+        }
+        for(int i = 1; i < xyaver[1].size();i++){
+            xyaver[1][0] = xyaver[1][0]>xyaver[1][i] ? xyaver[1][0] : xyaver[1][i];
+        }
+        return xyaver[1][0];
+    }
+    else if(d1r!=nullptr){
+        int counts = 0;
+        xyaver[0] = dnx->x;
+        xyaver[1].resize(dnx->pairs());
+        for(int i = 0; i < dnx->pairs();i++){
+            for(int j = 0; j < d1p->pairs();j++){
+                if(dnx->x[i] == d1p->x[j]){
+                    xyaver[1][i] += d1p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            for(int j = 0; j < d1r->pairs();j++){
+                if(dnx->x[i] == d1r->x[j]){
+                    xyaver[1][i] += d1r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+            xyaver[1][i] = xyaver[1][i] / counts;
+            counts = 0;
+        }
+        for(int i = 0; i < xyaver[1].size();i++){
+            xyaver[1][i] = qAbs(xyaver[1][i] - predict_y(b0, b1, xyaver[0][i]));
+        }
+        for(int i = 1; i < xyaver[1].size();i++){
+            xyaver[1][0] = xyaver[1][0]>xyaver[1][i] ? xyaver[1][0] : xyaver[1][i];
+        }
+        return xyaver[1][0];
+    }
+    else{
+        xyaver[0] = d1p->x;
+        xyaver[1] = d1p->y;
+        for(int i = 0; i < xyaver.size();i++){
+            xyaver[1][i] = qAbs(xyaver[1][i] - predict_y(b0, b1, xyaver[0][i]));
+        }
+        for(int i = 1; i < xyaver.size();i++){
+            xyaver[1][0] = xyaver[1][0]>xyaver[1][i] ? xyaver[1][0] : xyaver[1][i];
+        }
+        return xyaver[1][0];
+    }
 }
 
 double DataVec::Line(double &b0, double &b1)                                        //proved
@@ -302,14 +562,22 @@ Data *DataVec::getMaxPairsDNR()
         }
     else if (d1r!=nullptr)
         return d1r;//此处用函数记得检验d1r是否为空
-    return d1p;
+    return d1p;//返回d1p说明无其他dnr
 }
 
-double DataVec::getCountsPoints()                   //存在野指针
+Data *DataVec::getMaxPairsDNX()
+{
+    if(getMaxPairsDNP()->pairs() >= getMaxPairsDNR()->pairs())
+        return getMaxPairsDNP();
+    else return getMaxPairsDNR();
+}
+
+double DataVec::getCountsPoints()                   //proved
 {
     //计算各x定义标定点的循环次数，以d1p的x为基础定点，所以要求为第一列正行程必须为覆盖全自变量x的完整队列
     //否则将引入较麻烦的算法实现
     //以下是d1p x的定点算法，设想中关于解决这要求的算法是选择出行数最多的dnx列(2022.10.07 22:30,还未改算法，需要用到Data*getMaxPairsDNX())
+    //已改 2022.10.10
     Data *dnp = getMaxPairsDNP();
     Data *dnr = getMaxPairsDNR();
     int a = dnp->pairs();
@@ -421,11 +689,11 @@ double DataVec::getCountsPoints()                   //存在野指针
     //以下是残差平方和计算，并存入pDevia，rDevia
     for(int i = 0;i < a;i++){
         pDevia[i] += pNum1[i] + pNum2[i] + pNum3[i];
-        pDevia[i] = pDevia[i] / points[i] / (points[i] - 1);                //都是没有求根号的
+        pDevia[i] = pDevia[i] / points[i] / (points[i] - 1);                //都是没有求根号的，此处除以n和n-1之积
     }
     for(int i = 0;i < b;i++){
         rDevia[i] += rNum1[i] + rNum2[i] + rNum3[i];
-        rDevia[i] = rDevia[i] / points[i + a] / (points[i + a] - 1);        //都是没有求根号的
+        rDevia[i] = rDevia[i] / points[i + a] / (points[i + a] - 1);        //都是没有求根号的，此处除以n和n-1之积
     }
     //计算最后整个测试过程的标准偏差
     for(int i = 0;i < a;i++){
@@ -438,10 +706,11 @@ double DataVec::getCountsPoints()                   //存在野指针
     return qSqrt(stD4All);
 }
 
-double DataVec::deltaHyster()                                                       //proved 算法待证实
+double DataVec::deltaHyster2()                                                       //proved 算法待证实
 {
     //考虑到是成对输入构造Data函数，所以如果某列中缺单个数，会导致各列y的数值对应x不同（即错位），所以初版要求中间不能空数,下面是新算法
     //要保证不错位的话，则需要判断对应x相同，在计算正反行程的偏差前需添加if(dnp->x[i] == dnr->x[i]),但这也可能错位，故使用反行程用，dnr->[j]
+        //这个也是把三条直线全部分开算，没有算平均值再求取滞后量
     double sum[4] = {0, 0, 0, 0};
     if(d1r != nullptr){
         for(int i = 0;i < d1p->y.size();i++){
@@ -481,14 +750,159 @@ double DataVec::deltaHyster()                                                   
     return (sum[0] + sum[1] + sum[2]) / sum[3];
 }
 
+double DataVec::deltaHyster()                                       //proved
+{
+    double temp = 0;
+    int counts1 = 0;
+    int counts2 = 0;
+    QVector<QVector<double>> xpr4aver;
+    if(d1r!=nullptr&&d2p!=nullptr&&d2r!=nullptr&&d3p!=nullptr&&d3r!=nullptr){
+        Data* dnx = getMaxPairsDNX();
+        xpr4aver.resize(3);
+        xpr4aver[0].resize(dnx->pairs());
+        xpr4aver[1].resize(dnx->pairs());
+        xpr4aver[2].resize(dnx->pairs());
+        for(int i = 0;i < dnx->pairs();i++){
+            xpr4aver[0][i] = dnx->x[i];
+            for(int j = 0;j < d1p->pairs();j++){
+                if(d1p->x[j] == dnx->x[i]){
+                    counts1++;
+                    xpr4aver[1][i] += d1p->y[j];
+                    break;
+                }
+            }
+            for(int j = 0;j < d2p->pairs();j++){
+                if(d2p->x[j] == dnx->x[i]){
+                    counts1++;
+                    xpr4aver[1][i] += d2p->y[j];
+                    break;
+                }
+            }
+            for(int j = 0;j < d3p->pairs();j++){
+                if(d3p->x[j] == dnx->x[i]){
+                    counts1++;
+                    xpr4aver[1][i] += d3p->y[j];
+                    break;
+                }
+            }
+            for(int j = 0;j < d1r->pairs();j++){
+                if(d1r->x[j] == dnx->x[i]){
+                    counts2++;
+                    xpr4aver[2][i] += d1r->y[j];
+                    break;
+                }
+            }
+            for(int j = 0;j < d2r->pairs();j++){
+                if(d2r->x[j] == dnx->x[i]){
+                    counts2++;
+                    xpr4aver[2][i] += d2r->y[j];
+                    break;
+                }
+            }
+            for(int j = 0;j < d3r->pairs();j++){
+                if(d3r->x[j] == dnx->x[i]){
+                    counts2++;
+                    xpr4aver[2][i] += d3r->y[j];
+                    break;
+                }
+            }
+            xpr4aver[1][i] = xpr4aver[1][i] / counts1;
+            xpr4aver[2][i] = xpr4aver[2][i] / counts2;
+            counts1 = 0;
+            counts2 = 0;
+        }
+        //此处已经收集了三对直线的平均值，xpr4aver成功x，p——average，r——average,接下来是计算deltaHyster
+        temp = qAbs(xpr4aver[1][0] - xpr4aver[2][0]);
+        for(int i = 1;i < dnx->pairs();i++){
+            temp = temp > qAbs(xpr4aver[1][i] - xpr4aver[2][i]) ? temp : qAbs(xpr4aver[1][i] - xpr4aver[2][i]);
+        }
+        return temp;
+    }
+    else if(d1r!=nullptr&&d2p!=nullptr&&d2r!=nullptr){
+        Data* dnx = getMaxPairsDNX();
+        xpr4aver.resize(3);
+        QVector<int> counts1(dnx->pairs(),0);
+        QVector<int> counts2(dnx->pairs(),0);
+        xpr4aver[0].resize(dnx->pairs());
+        xpr4aver[1].resize(dnx->pairs());
+        xpr4aver[2].resize(dnx->pairs());
+        for(int i = 0;i < dnx->pairs();i++){
+            xpr4aver[0][i] = dnx->x[i];
+            for(int j = 0;j < d1p->pairs();j++){
+                if(d1p->x[j] == dnx->x[i]){
+                    counts1[i]++;
+                    xpr4aver[1][i] += d1p->y[j];
+                    break;
+                }
+            }
+            for(int j = 0;j < d2p->pairs();j++){
+                if(d2p->x[j] == dnx->x[i]){
+                    counts1[i]++;
+                    xpr4aver[1][i] += d2p->y[j];
+                    break;
+                }
+            }
+            for(int j = 0;j < d1r->pairs();j++){
+                if(d1r->x[j] == dnx->x[i]){
+                    counts2[i]++;
+                    xpr4aver[2][i] += d1r->y[j];
+                    break;
+                }
+            }
+            for(int j = 0;j < d2r->pairs();j++){
+                if(d2r->x[j] == dnx->x[i]){
+                    counts2[i]++;
+                    xpr4aver[2][i] += d2r->y[j];
+                    break;
+                }
+            }
+            xpr4aver[1][i] = xpr4aver[1][i] / counts1[i];
+            xpr4aver[2][i] = xpr4aver[2][i] / counts2[i];
+        }
+        temp = qAbs(xpr4aver[1][0] - xpr4aver[2][0]);
+        for(int i = 1;i < dnx->pairs();i++){
+            temp = temp > qAbs(xpr4aver[1][i] - xpr4aver[2][i]) ? temp : qAbs(xpr4aver[1][i] - xpr4aver[2][i]);
+        }
+        return temp;
+    }
+    else if(d1r!=nullptr){
+        Data* dnx = getMaxPairsDNX();
+        xpr4aver.resize(3);
+        xpr4aver[0].resize(dnx->pairs());
+        xpr4aver[1].resize(dnx->pairs());
+        xpr4aver[2].resize(dnx->pairs());
+        for(int i = 0;i < dnx->pairs();i++){
+            xpr4aver[0][i] = dnx->x[i];
+            for(int j = 0;j < d1p->pairs();j++){
+                if(d1p->x[j] == dnx->x[i]){
+                    xpr4aver[1][i] += d1p->y[j];
+                    break;
+                }
+            }
+            for(int j = 0;j < d1r->pairs();j++){
+                if(d1r->x[j] == dnx->x[i]){
+                    xpr4aver[2][i] += d1r->y[j];
+                    break;
+                }
+            }
+        }
+        temp = qAbs(xpr4aver[1][0] - xpr4aver[2][0]);
+        for(int i = 1;i < dnx->pairs();i++){
+            temp = temp > qAbs(xpr4aver[1][i] - xpr4aver[2][i]) ? temp : qAbs(xpr4aver[1][i] - xpr4aver[2][i]);
+        }
+        return temp;
+    }
+    else return 0;
+}
+
 double DataVec::Hyster(double &b1)                                                  //proved
 {
     return deltaHyster() / fullScale(b1) * 100;
 }
 
-double DataVec::Repeat(int a)
+double DataVec::Repeat(double &b1, int a)
 {
-    return getCountsPoints() * a;
+    return getCountsPoints() * a * 100 / fullScale(b1);
 }
 
 void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，所以有4个元素位置  //proved
@@ -538,3 +952,13 @@ void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，�
     b[0] = b[3] - b[1] * b[2];
 }
 
+void DataVec::BiP(QVector<double> &b)
+{
+
+}
+
+
+double average(double x, int num)
+{
+    return x / (double)num;
+}
