@@ -22,16 +22,30 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::LsmShow(QVector<double> &bs, DataVec &dvlsm){
+    qDebug()<<"最小二乘法";
     dvlsm.Lsm(bs);
-    ui->lineEditLsmB0->setText(QString::number(bs[0], 'e', 3));
-    ui->lineEditLsmB1->setText(QString::number(bs[1], 'e', 3));
-    ui->lineEditLsmFS->setText(QString::number(dvlsm.fullScale(bs[1]), 'g', 3));
-    ui->lineEditLsmLine->setText(QString::number(dvlsm.Line(bs[0], bs[1]), 'g', 3));
-    ui->lineEditLsmHysteria->setText(QString::number(dvlsm.Hyster(bs[1]), 'g', 3));
+    ui->lineEditLsmB0->setText(QString::number(bs[0], 'g', 3));
+    ui->lineEditLsmB1->setText(QString::number(bs[1], 'g', 3));
+    ui->lineEditLsmFS->setText(QString::number(dvlsm.fullScale(bs[1]), 'g', 2));
+    ui->lineEditLsmLine->setText(QString::number(dvlsm.Line(bs[0], bs[1]), 'g', 2));
+    ui->lineEditLsmHysteria->setText(QString::number(dvlsm.Hyster(bs[1]), 'g', 2));
     float k = ui->lineEditK->text().toFloat();
     if(k)
-        ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1],k),'g',3));
-    else ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1]),'g',3));
+        ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1],k),'g',2));
+    else ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1]),'g',2));
+}
+
+void MainWindow::BiPShow(QVector<double> &bs, DataVec &dvbip)
+{
+    qDebug()<<"两点法";
+    dvbip.BiP(bs);
+    ui->lineEditBiPB0->setText(QString::number(bs[2], 'g', 3));
+    ui->lineEditBiPB1->setText(QString::number(bs[3], 'g', 3));
+    ui->lineEditBiPFS->setText(QString::number(dvbip.fullScale(bs[3]), 'g', 2));
+    ui->lineEditBiPLine->setText(QString::number(dvbip.Line(bs[2], bs[3]), 'g', 2));
+    ui->lineEditBiPHysteria->setText(QString::number(dvbip.Hyster(bs[3]), 'g', 2));
+    QString temp = ui->lineEditLsmRepeat->text();
+    ui->lineEditBiPRepeat->setText(temp);
 }
 //采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit11_textEdited(const QString &arg1)
@@ -314,6 +328,7 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
         else ui->lineEditLsmRepeat->setText(QString::number(dv.Repeat(),'g',3));
     }*/
     LsmShow(bs,dv);
+    BiPShow(bs,dv);
     qDebug()<<bs;
 }
 

@@ -14,6 +14,12 @@ Data::Data(QVector<QString> &m1, QVector<QString> &n1)                          
     }*/
     //此处注释掉，保证成对录入数据
 }
+
+Data::Data(QVector<double> &dx, QVector<double> &dy)
+{
+    x = dx;
+    y = dy;
+}
 int Data::pairs(){                                                                  //proved
     return x.size();
 }
@@ -38,6 +44,26 @@ double Data::min_x()
     return min;
 }
 
+double Data::maxx2y()
+{
+    double max = max_x();
+    for(int i = x.size()-1;i >= 0;i--){
+        if(max == x[i])
+            return y[i];
+    }
+    return 0;
+}
+
+double Data::minx2y()
+{
+    double min = min_x();
+    for(int i = 0;i < x.size();i++){
+        if(min == x[i])
+            return y[i];
+    }
+    return 0;
+}
+
 double Data::range_x()
 {
     double max = x[0];
@@ -49,6 +75,11 @@ double Data::range_x()
             min = x[i];
     }
     return max - min;
+}
+
+double Data::rangex2y()
+{
+    return maxx2y() - minx2y();
 }
 
 double Data::sumx(){                                                                //proved
@@ -666,7 +697,7 @@ double DataVec::getCountsPoints()                   //proved
                     }
                 }
             }
-            sumr[i] = sumr[i]/points[i];//此处成为相同x下反行程所有y值的平均值
+            sumr[i] = sumr[i] / points[i + a];//此处成为相同x下反行程所有y值的平均值
         }
     }
     //以下是计算残差平方并存入相应的位置
@@ -946,15 +977,88 @@ void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，�
         b[3] += d3r->sumy();
         pairsofAll += d3r->pairs();
     }
-    b[2] = b[2]/pairsofAll;
-    b[3] = b[3]/pairsofAll;//准备工作完成，接下来是正式计算b0,b1的系数并存入
-    b[1] = (b[1] - pairsofAll * b[2] * b[3])/(b[0] - pairsofAll * b[2] * b[2]);
-    b[0] = b[3] - b[1] * b[2];
+    //此处b的数组分别为x^2和，y^2和，x和，y和
+    b[2] = b[2]/pairsofAll;//x均值
+    b[3] = b[3]/pairsofAll;//y均值    ，准备工作完成，接下来是正式计算b0,b1的系数并存入
+    b[1] = (b[1] - pairsofAll * b[2] * b[3])/(b[0] - pairsofAll * b[2] * b[2]);// 最小二乘斜率
+    b[0] = b[3] - b[1] * b[2]; // 最小二乘截距
 }
 
-void DataVec::BiP(QVector<double> &b)
+void DataVec::BiP(QVector<double> &b)// 量程上下限两点确定直线,此处拟用b[2],b[3]分别存储 二点法截距和斜率, proved
 {
-
+    Data* dnx = getMaxPairsDNX();
+    //在执行lsm后，b的数组值分别为：最小二乘直线的截距，最小二乘直线的斜率，所有数据的x的平均值，所有数据的y的平均值
+    QVector<double> x(dnx->pairs(),0);
+    QVector<double> y(dnx->pairs(), 0);
+    int counts = 0;
+    for(int i = 0;i < dnx->pairs();i++){
+        if(d1p != nullptr){
+            for(int j = 0;j < d1p->pairs();j++){
+                if(dnx->x[i] == d1p->x[j]){
+                    x[i] += d1p->x[j];
+                    y[i] += d1p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+        }
+        if(d1r != nullptr){
+            for(int j = 0;j < d1r->pairs();j++){
+                if(dnx->x[i] == d1r->x[j]){
+                    x[i] += d1r->x[j];
+                    y[i] += d1r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+        }
+        if(d2p != nullptr){
+            for(int j = 0;j < d2p->pairs();j++){
+                if(dnx->x[i] == d2p->x[j]){
+                    x[i] += d2p->x[j];
+                    y[i] += d2p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+        }
+        if(d2r != nullptr){
+            for(int j = 0;j < d2r->pairs();j++){
+                if(dnx->x[i] == d2r->x[j]){
+                    x[i] += d2r->x[j];
+                    y[i] += d2r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+        }
+        if(d3p != nullptr){
+            for(int j = 0;j < d3p->pairs();j++){
+                if(dnx->x[i] == d3p->x[j]){
+                    x[i] += d3p->x[j];
+                    y[i] += d3p->y[j];
+                    counts++;
+                    break;
+                }
+            }
+        }
+        if(d3r != nullptr){
+            for(int j = 0;j < d3r->pairs();j++){
+                if(dnx->x[i] == d3r->x[j]){
+                    x[i] += d3r->x[j];
+                    y[i] += d3r->y[j];
+                    counts++;
+                    break;
+                }
+            }
+        }
+        x[i] = x[i] / counts;
+        y[i] = y[i] / counts;
+        counts = 0;
+    }
+    Data aver(x, y);
+    b[3] = aver.rangex2y() / aver.range_x();
+    b[2] = aver.y[0] - aver.x[0] * b[3];//后续这里要改成最值的y和x值
 }
 
 

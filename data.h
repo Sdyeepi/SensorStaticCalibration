@@ -13,10 +13,14 @@ public:
     QVector<double> y;
     bool ok;
     Data(QVector<QString> &m1, QVector<QString> &n1);
+    Data(QVector<double> &dx, QVector<double> &dy);
     int pairs();//返回x，y两个容器的单个的元素个数,即返回容器元素对数
     double max_x();
     double min_x();
+    double maxx2y();
+    double minx2y();
     double range_x();
+    double rangex2y();
     double sumy();
     double sumx();
     double avey();//平均数y
