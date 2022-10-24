@@ -44,8 +44,12 @@ void MainWindow::BiPShow(QVector<double> &bs, DataVec &dvbip)
     ui->lineEditBiPFS->setText(QString::number(dvbip.fullScale(bs[3]), 'g', 2));
     ui->lineEditBiPLine->setText(QString::number(dvbip.Line(bs[2], bs[3]), 'g', 2));
     ui->lineEditBiPHysteria->setText(QString::number(dvbip.Hyster(bs[3]), 'g', 2));
-    QString temp = ui->lineEditLsmRepeat->text();
-    ui->lineEditBiPRepeat->setText(temp);
+    //QString temp = ui->lineEditLsmRepeat->text();
+    //ui->lineEditBiPRepeat->setText(temp);
+    float k = ui->lineEditK->text().toFloat();
+    if(k)
+        ui->lineEditBiPRepeat->setText(QString::number(dvbip.Repeat2(bs[3],k),'g',2));
+    else ui->lineEditBiPRepeat->setText(QString::number(dvbip.Repeat2(bs[3]),'g',2));
 }
 //采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
 void MainWindow::on_lineEdit11_textEdited(const QString &arg1)

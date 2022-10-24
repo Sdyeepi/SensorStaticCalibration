@@ -254,6 +254,16 @@ DataVec DataVec::operator=(DataVec &dv2)                                        
     return *this;
 }
 
+double DataVec::DataVecMax_X()
+{
+    return getMaxPairsDNX()->max_x();
+}
+
+double DataVec::DataVecMin_X()
+{
+    return getMaxPairsDNX()->min_x();
+}
+
 double DataVec::fullScale(double &b1)                                               //proved,算法需要改，d1p的自变量量程不一定最大
 {
     return d1p->range_x() * b1 ;
@@ -737,6 +747,130 @@ double DataVec::getCountsPoints()                   //proved
     return qSqrt(stD4All);
 }
 
+double DataVec::getCountsPoints2()
+{
+    Data *dnp = getMaxPairsDNP();
+    Data *dnr = getMaxPairsDNR();
+    int a = dnp->pairs();
+    int b = dnr->pairs();
+    QVector<double> sump(a,0);
+    QVector<double> sumr(b,0);
+    QVector<double> pNum1(a, 0);
+    QVector<double> pNum2(a, 0);
+    QVector<double> pNum3(a, 0);
+    QVector<double> rNum1(b, 0);
+    QVector<double> rNum2(b, 0);
+    QVector<double> rNum3(b, 0);
+    QVector<double> pDevia(a, 0);
+    QVector<double> rDevia(b, 0);
+    double stdp = 0;
+    double stdr = 0;
+    double stD4All = 0;
+    for(int i = 0;i < a;i++){
+        if(d1p != nullptr)
+        {
+            for(int j = 0;j < d1p->pairs();j++){
+                if(dnp->x[i]==d1p->x[j]){
+                    sump[i] += d1p->y[j];
+                    pNum1[i] = d1p->y[j];
+                    break;
+                }
+            }
+        }
+        if(d2p != nullptr)
+        {
+            for(int j = 0;j < d2p->pairs();j++){
+                if(dnp->x[i]==d2p->x[j]){
+                    sump[i] += d2p->y[j];
+                    pNum2[i] = d2p->y[j];
+                    break;
+                }
+            }
+        }
+        if(d3p != nullptr)
+        {
+            for(int j = 0;j < d3p->pairs();j++){
+                if(dnp->x[i]==d3p->x[j]){
+                    sump[i] += d3p->y[j];
+                    pNum3[i] = d3p->y[j];
+                    break;
+                }
+            }
+        }
+        sump[i] = sump[i]/points[i];//此处成为相同x下正行程所有y值的平均值
+    }
+    if(dnr != d1p){
+        for(int i = 0;i < b;i++){
+            if(d1r != nullptr)
+            {
+                for(int j = 0;j < d1r->pairs();j++){
+                    if(dnr->x[i]==d1r->x[j]){
+                        sumr[i] += d1r->y[j];
+                        rNum1[i] = d1r->y[j];
+                        break;
+                    }
+                }
+            }
+            if(d2r != nullptr)
+            {
+                for(int j = 0;j < d2r->pairs();j++){
+                    if(dnr->x[i]==d2r->x[j]){
+                        sumr[i] += d2r->y[j];
+                        rNum2[i] = d2r->y[j];
+                        break;
+                    }
+                }
+            }
+            if(d3r != nullptr)
+            {
+                for(int j = 0;j < d3r->pairs();j++){
+                    if(dnr->x[i]==d3r->x[j]){
+                        sumr[i] += d3r->y[j];
+                        rNum3[i] = d3r->y[j];
+                        break;
+                    }
+                }
+            }
+            sumr[i] = sumr[i] / points[i + a];//此处成为相同x下反行程所有y值的平均值
+        }
+    }
+    //以下是计算残差平方并存入相应的位置
+    for(int i = 0;i < a;i++){
+        if(pNum1[i] != 0)
+            pNum1[i] = (pNum1[i] - sump[i]) * (pNum1[i] - sump[i]);
+        if(pNum2[i] != 0)
+            pNum2[i] = (pNum2[i] - sump[i]) * (pNum2[i] - sump[i]);
+        if(pNum3[i] != 0)
+            pNum3[i] = (pNum3[i] - sump[i]) * (pNum3[i] - sump[i]);
+    }
+    for(int j = 0;j < b;j++){
+        if(rNum1[j] != 0)
+            rNum1[j] = (rNum1[j] - sumr[j]) * (rNum1[j] - sumr[j]);
+        if(rNum1[j] != 0)
+            rNum2[j] = (rNum2[j] - sumr[j]) * (rNum2[j] - sumr[j]);
+        if(rNum1[j] != 0)
+            rNum3[j] = (rNum3[j] - sumr[j]) * (rNum3[j] - sumr[j]);
+    }
+    //以下是残差平方和计算，并存入pDevia，rDevia
+    for(int i = 0;i < a;i++){
+        pDevia[i] += pNum1[i] + pNum2[i] + pNum3[i];
+        pDevia[i] = pDevia[i] / points[i] / (points[i] - 1);                //都是没有求根号的，此处除以n和n-1之积
+    }
+    for(int i = 0;i < b;i++){
+        rDevia[i] += rNum1[i] + rNum2[i] + rNum3[i];
+        rDevia[i] = rDevia[i] / points[i + a] / (points[i + a] - 1);        //都是没有求根号的，此处除以n和n-1之积
+    }
+    //计算最后整个测试过程的标准偏差
+    for(int i = 0;i < a;i++){
+        stdp += pDevia[i];
+    }
+    for(int i = 0;i < b;i++){
+        stdr += rDevia[i];
+    }
+    stD4All = (stdp + stdr) / (a + b);
+    return qSqrt(stD4All);
+}
+
 double DataVec::deltaHyster2()                                                       //proved 算法待证实
 {
     //考虑到是成对输入构造Data函数，所以如果某列中缺单个数，会导致各列y的数值对应x不同（即错位），所以初版要求中间不能空数,下面是新算法
@@ -934,6 +1068,11 @@ double DataVec::Hyster(double &b1)                                              
 double DataVec::Repeat(double &b1, int a)
 {
     return getCountsPoints() * a * 100 / fullScale(b1);
+}
+
+double DataVec::Repeat2(double &b1, int a)
+{
+    return getCountsPoints2() * a * 100 / fullScale(b1);
 }
 
 void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，所以有4个元素位置  //proved
