@@ -144,8 +144,8 @@ DataVec::DataVec()                                                              
     QPoints.resize(0);
 }
 
-DataVec::DataVec(Data *a1p){                                                        //proved,QPoints and points not
-    d1p = a1p;
+DataVec::DataVec(Data &a1p){                                                        //proved,QPoints and points not
+    d1p = &a1p;
     d2p = nullptr;
     d3p = nullptr;
     d1r = nullptr;
@@ -158,9 +158,9 @@ DataVec::DataVec(Data *a1p){                                                    
         QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
     }
 }//测试用
-DataVec::DataVec(Data *a1p, Data *a1r){                                             //proved,QPoints and points not
-    d1p = a1p;
-    d1r = a1r;
+DataVec::DataVec(Data &a1p, Data &a1r){                                             //proved,QPoints and points not
+    d1p = &a1p;
+    d1r = &a1r;
     d2p = nullptr;
     d2r = nullptr;
     d3p = nullptr;
@@ -179,11 +179,11 @@ DataVec::DataVec(Data *a1p, Data *a1r){                                         
         QPoints[1].append(QPointF(d1r->x[i], d1r->y[i]));
     }
 }
-DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r){                       //proved,QPoints and points not
-    d1p = a1p;
-    d1r = a1r;
-    d2p = a2p;
-    d2r = a2r;
+DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r){                       //proved,QPoints and points not
+    d1p = &a1p;
+    d1r = &a1r;
+    d2p = &a2p;
+    d2r = &a2r;
     d3p = nullptr;
     d3r = nullptr;
     Data *dnp = getMaxPairsDNP();
@@ -202,14 +202,14 @@ DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r){                   
         QPoints[3].append(QPointF(d2r->x[i], d2r->y[i]));
     }
 }
-DataVec::DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r, Data *a3p, Data *a3r)  //proved,QPoints and points not
+DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r, Data &a3p, Data &a3r)  //proved,QPoints and points not
 {
-    d1p = a1p;
-    d2p = a2p;
-    d3p = a3p;
-    d1r = a1r;
-    d2r = a2r;
-    d3r = a3r;
+    d1p = &a1p;
+    d2p = &a2p;
+    d3p = &a3p;
+    d1r = &a1r;
+    d2r = &a2r;
+    d3r = &a3r;
     Data *dnp = getMaxPairsDNP();
     Data *dnr = getMaxPairsDNR();
     if(dnr != d1p){

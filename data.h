@@ -44,10 +44,10 @@ public:
     QVector<QVector<QPointF>> QPoints;//将数对转化为坐标点，二维容器，最上层存放了各个队列对应的点集，最内层为点集的点。
                                       //QPointF[0]为d1p，1 d1r，2 d2p，3 d2r，4 d3p，5 d3r。若后面的队列有的话，没有队列则也没有相应的QPointF[i]
     DataVec();
-    DataVec(Data *a1p);
-    DataVec(Data *a1p, Data *a1r);
-    DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r);
-    DataVec(Data *a1p, Data *a1r, Data *a2p, Data *a2r, Data *a3p, Data *a3r);
+    DataVec(Data &a1p);
+    DataVec(Data &a1p, Data &a1r);
+    DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r);
+    DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r, Data &a3p, Data &a3r);
     DataVec(DataVec &dv1);
     DataVec operator=(DataVec &dv2);
     double DataVecMax_X();

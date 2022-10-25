@@ -981,7 +981,7 @@
      <item row="2" column="2" colspan="3">
       <widget class="QLineEdit" name="lineEditLsmLine">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;该值为已输入所有数据中同一x下的所有值与估计值的最大偏差计算得出的，而非通过计算三条直线同一x下的平均值与估计值的偏差算出的非线性度&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -990,7 +990,7 @@
         <bool>true</bool>
        </property>
        <property name="placeholderText">
-        <string>悬浮于此获得该项说明</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -1275,11 +1275,17 @@
      </item>
      <item row="4" column="2" colspan="3">
       <widget class="QLineEdit" name="lineEditBiPRepeat">
+       <property name="toolTip">
+        <string>当为1组正反行程或没有时，由于贝塞尔公式会显示non</string>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>悬浮于此获得该项说明</string>
        </property>
       </widget>
      </item>
@@ -1305,7 +1311,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QGraphicsView" name="gViewOrigin">
+   <widget class="QtCharts::QChartView" name="gViewOrigin">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -1313,6 +1319,9 @@
       <width>571</width>
       <height>271</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>左键框选放大图像，右键单击缩小图像，可重新点击计算（更新）恢复原像</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
@@ -1331,7 +1340,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="gViewLsmBip">
+   <widget class="QtCharts::QChartView" name="gViewLsmBip">
     <property name="geometry">
      <rect>
       <x>600</x>
@@ -1366,6 +1375,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QtCharts::QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header>qchartview.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>lineEdit11</tabstop>
   <tabstop>lineEdit21</tabstop>
