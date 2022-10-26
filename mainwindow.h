@@ -30,7 +30,7 @@ public:
     void LsmShow(QVector<double> &b, DataVec &dvlsm);
     void BiPShow(QVector<double> &b, DataVec &dvbit);
     void gVOriShow(DataVec &dv);
-    void gVLsmBipShow(QVector<double> &bs);
+    void gVLsmBipShow(QVector<double> &bs, DataVec &dv);
 
 private slots:
     void on_lineEdit11_textEdited(const QString &arg1);
@@ -98,6 +98,18 @@ private slots:
 
     void on_pBtnUpdate_clicked();
 
+    void on_pBtn1pVis_clicked();
+
+    void on_pBtn1rVis_clicked();
+
+    void on_pBtn2pVis_clicked();
+
+    void on_pBtn2rVis_clicked();
+
+    void on_pBtn3pVis_clicked();
+
+    void on_pBtn3rVis_clicked();
+
 private:
     Ui::MainWindow *ui;
     QVector<QString> x;
@@ -111,8 +123,8 @@ private:
     QPointer<QChart> chart;
     QPointer<QChart> chart2;
     QVector<QPointer<QLineSeries>> SeriesVec;
-    QPointer<QLineSeries> LineLsm;
-    QPointer<QLineSeries> LineBip;
+    QVector<QPointer<QLineSeries>> LineLsm;
+    QVector<QPointer<QLineSeries>> LineBip;
 };
 
 

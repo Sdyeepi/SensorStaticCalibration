@@ -56,8 +56,17 @@ void MainWindow::BiPShow(QVector<double> &bs, DataVec &dvbip)
 void MainWindow::gVOriShow(DataVec &dv)
 {
     chart = ui->gViewOrigin->chart();
+    QString lang = "0";
     for(int i = 0;i < SeriesVec.size();i++){
         SeriesVec[i] = new QLineSeries();
+        if(i%2){
+            lang = "反";
+        }
+        else lang = "正";
+        SeriesVec[i]->setName(QString('1'+i/2)+lang);
+        SeriesVec[i]->setPointsVisible();
+        SeriesVec[i]->setPointLabelsVisible();
+        SeriesVec[i]->setPointLabelsColor(QColor("black"));
         for(QVector<QPointF>::Iterator iter=dv.QPoints[i].begin();iter != dv.QPoints[i].end();iter++){
             SeriesVec[i]->append(*iter);
         }
@@ -68,15 +77,33 @@ void MainWindow::gVOriShow(DataVec &dv)
     ui->gViewOrigin->setRubberBand(QChartView::RectangleRubberBand);
 }
 
-void MainWindow::gVLsmBipShow(QVector<double> &bs)
+void MainWindow::gVLsmBipShow(QVector<double> &bs, DataVec &dv)
 {
+    double x0 = dv.DataVecMin_X();
+    double x1 = dv.DataVecMax_X();
+    double yLsm0 = x0 * bs[1] + bs[0];
+    double yLsm1 = x1 * bs[1] + bs[0];
+    double yBip0 = x0 * bs[3] + bs[2];
+    double yBip1 = x1 * bs[3] + bs[2];
+    LineLsm.resize(1);
+    LineBip.resize(1);
     chart2 = ui->gViewLsmBip->chart();
-    LineLsm = new QLineSeries();
-    LineBip = new QLineSeries();
-    LineLsm->setColor(QColor("red"));
-    LineBip->setColor(QColor("greenyellow"));
-    //这里我决定直接使用x和y的步长来代替直线
-
+    LineLsm[0] = new QLineSeries();
+    LineBip[0] = new QLineSeries();
+    LineLsm[0]->setColor(QColor("red"));
+    LineLsm[0]->setName(tr("最小二乘拟合"));
+    LineBip[0]->setColor(QColor("blue"));
+    LineBip[0]->setName(tr("两段点法拟合"));
+    //这里决定直接使用x和y的步长来代替直线
+    LineLsm[0]->append(x0, yLsm0);
+    LineLsm[0]->append(x1, yLsm1);
+    LineBip[0]->append(x0, yBip0);
+    LineBip[0]->append(x1, yBip1);
+    chart2->addSeries(LineLsm[0]);
+    chart2->addSeries(LineBip[0]);
+    chart2->setTitle("拟合数据");
+    chart2->createDefaultAxes();
+    ui->gViewLsmBip->setRubberBand(QChartView::RectangleRubberBand);
 }
 
 
@@ -325,6 +352,8 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
         for(int i = 0;i < SeriesVec.size();i++){
             delete SeriesVec[i];
         }
+        delete LineBip[0];
+        delete LineLsm[0];
     }//此处是为了防止多次缓存数据图
     Data Dy1p(x, y1p);
     Data Dy2p(x, y2p);
@@ -382,8 +411,69 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
         gVOriShow(dv);
         LsmShow(bs,dv);
         BiPShow(bs,dv);
+        gVLsmBipShow(bs,dv);
         qDebug()<<bs;
     }
 }
 
+
+
+void MainWindow::on_pBtn1pVis_clicked()
+{
+    static bool vis=1;
+    vis = !vis;
+    if(SeriesVec.size()>=1){
+        SeriesVec[0]->setVisible(vis);
+    }
+}
+
+
+void MainWindow::on_pBtn1rVis_clicked()
+{
+    static bool vis=1;
+    vis = !vis;
+    if(SeriesVec.size()>=2){
+        SeriesVec[1]->setVisible(vis);
+    }
+}
+
+
+void MainWindow::on_pBtn2pVis_clicked()
+{
+    static bool vis=1;
+    vis = !vis;
+    if(SeriesVec.size()>=3){
+        SeriesVec[2]->setVisible(vis);
+    }
+}
+
+
+void MainWindow::on_pBtn2rVis_clicked()
+{
+    static bool vis=1;
+    vis = !vis;
+    if(SeriesVec.size()>=4){
+        SeriesVec[3]->setVisible(vis);
+    }
+}
+
+
+void MainWindow::on_pBtn3pVis_clicked()
+{
+    static bool vis=1;
+    vis = !vis;
+    if(SeriesVec.size()>=5){
+        SeriesVec[4]->setVisible(vis);
+    }
+}
+
+
+void MainWindow::on_pBtn3rVis_clicked()
+{
+    static bool vis=1;
+    vis = !vis;
+    if(SeriesVec.size()>=6){
+        SeriesVec[5]->setVisible(vis);
+    }
+}
 

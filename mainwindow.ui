@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1184</width>
-    <height>793</height>
+    <width>1192</width>
+    <height>873</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>581</width>
-      <height>371</height>
+      <height>351</height>
      </rect>
     </property>
     <property name="title">
@@ -1085,8 +1085,8 @@
    <widget class="QLabel" name="LBleCnFac">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>390</y>
+      <x>30</x>
+      <y>400</y>
       <width>81</width>
       <height>29</height>
      </rect>
@@ -1101,11 +1101,14 @@
    <widget class="QPushButton" name="pBtnUpdate">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>390</y>
+      <x>490</x>
+      <y>400</y>
       <width>99</width>
       <height>29</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>点击以计算或者更新数据</string>
     </property>
     <property name="text">
      <string>计算（更新）</string>
@@ -1114,8 +1117,8 @@
    <widget class="QLineEdit" name="lineEditK">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>390</y>
+      <x>120</x>
+      <y>400</y>
       <width>221</width>
       <height>25</height>
      </rect>
@@ -1317,7 +1320,7 @@
       <x>20</x>
       <y>430</y>
       <width>571</width>
-      <height>271</height>
+      <height>351</height>
      </rect>
     </property>
     <property name="toolTip">
@@ -1328,10 +1331,13 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>710</y>
+      <y>790</y>
       <width>771</width>
       <height>25</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>若无法访问请使用vpn工具</string>
     </property>
     <property name="text">
      <string>代码见本人项目地址    https://github.com/Sdyeepi/SensorStaticCalibration</string>
@@ -1346,8 +1352,107 @@
       <x>600</x>
       <y>430</y>
       <width>571</width>
-      <height>271</height>
+      <height>351</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>左键框选放大图像，右键单击缩小图像，可重新点击计算（更新）恢复原像</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pBtn1pVis">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>360</y>
+      <width>71</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>点击可选择在下图中原始数据是否可见</string>
+    </property>
+    <property name="text">
+     <string>1正可视</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pBtn1rVis">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>360</y>
+      <width>71</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>点击可选择在下图中原始数据是否可见</string>
+    </property>
+    <property name="text">
+     <string>1反可视</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pBtn2pVis">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>360</y>
+      <width>71</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>点击可选择在下图中原始数据是否可见</string>
+    </property>
+    <property name="text">
+     <string>2正可视</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pBtn2rVis">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>360</y>
+      <width>71</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>点击可选择在下图中原始数据是否可见</string>
+    </property>
+    <property name="text">
+     <string>2反可视</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pBtn3pVis">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>360</y>
+      <width>71</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>点击可选择在下图中原始数据是否可见</string>
+    </property>
+    <property name="text">
+     <string>3正可视</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pBtn3rVis">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>360</y>
+      <width>71</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>点击可选择在下图中原始数据是否可见</string>
+    </property>
+    <property name="text">
+     <string>3反可视</string>
     </property>
    </widget>
   </widget>
@@ -1356,7 +1461,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1184</width>
+     <width>1192</width>
      <height>26</height>
     </rect>
    </property>
