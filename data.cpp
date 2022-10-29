@@ -144,7 +144,7 @@ DataVec::DataVec()                                                              
     QPoints.resize(0);
 }
 
-DataVec::DataVec(Data &a1p){                                                        //proved,QPoints and points not
+DataVec::DataVec(Data &a1p){                                                        //proved
     d1p = &a1p;
     d2p = nullptr;
     d3p = nullptr;
@@ -158,7 +158,7 @@ DataVec::DataVec(Data &a1p){                                                    
         QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
     }
 }//测试用
-DataVec::DataVec(Data &a1p, Data &a1r){                                             //proved,QPoints and points not
+DataVec::DataVec(Data &a1p, Data &a1r){                                             //proved
     d1p = &a1p;
     d1r = &a1r;
     d2p = nullptr;
@@ -179,7 +179,7 @@ DataVec::DataVec(Data &a1p, Data &a1r){                                         
         QPoints[1].append(QPointF(d1r->x[i], d1r->y[i]));
     }
 }
-DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r){                       //proved,QPoints and points not
+DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r){                       //proved
     d1p = &a1p;
     d1r = &a1r;
     d2p = &a2p;
@@ -202,7 +202,7 @@ DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r){                   
         QPoints[3].append(QPointF(d2r->x[i], d2r->y[i]));
     }
 }
-DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r, Data &a3p, Data &a3r)  //proved,QPoints and points not
+DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r, Data &a3p, Data &a3r)  //proved
 {
     d1p = &a1p;
     d2p = &a2p;
@@ -264,7 +264,7 @@ double DataVec::DataVecMin_X()
     return getMaxPairsDNX()->min_x();
 }
 
-double DataVec::fullScale(double &b1)                                               //proved,算法需要改，d1p的自变量量程不一定最大
+double DataVec::fullScale(double &b1)                                               //proved,算法需要改，d1p（输入列和第一列）的自变量量程不一定最大
 {
     return d1p->range_x() * b1 ;
 }
@@ -274,8 +274,8 @@ double DataVec::predict_y(double &b0, double &b1, double x)
     return b0 + b1 * x;
 }
 
-double DataVec::deltaLmax2(double &b0, double &b1)                            //proved,此结果不是将三条直线的同一点的平均值与估计值做比较，而是同一x的所有点
-{//由上方注释知道，要去三个数值的平均值，还未改
+double DataVec::deltaLmax2(double &b0, double &b1)                            //proved,但不采用，理由见中间
+{
     double delta1 = 0;
     QVector<double> deltas;
     //计算同一x下的平均值,不考虑过于复杂，直接面对3对正方行程吧
@@ -326,7 +326,7 @@ double DataVec::deltaLmax2(double &b0, double &b1)                            //
 
 }
 
-double DataVec::deltaLmax(double &b0, double &b1)
+double DataVec::deltaLmax(double &b0, double &b1)                                   //proved,在采用
 {
     QVector<QVector<double>> xyaver(2);
     Data* dnx = getMaxPairsDNX();
@@ -570,7 +570,7 @@ double DataVec::Line(double &b0, double &b1)                                    
     return deltaLmax(b0, b1) / fullScale(b1) * 100;//此处为百分数，已×100
 }
 
-Data *DataVec::getMaxPairsDNP()
+Data *DataVec::getMaxPairsDNP()                                                     //proved
 {
     if(d1p!=nullptr&&d2p!=nullptr&&d3p!=nullptr){
             if(d1p->pairs()>d2p->pairs()&&d1p->pairs()>d3p->pairs())
@@ -587,7 +587,7 @@ Data *DataVec::getMaxPairsDNP()
     else return d1p;
 }
 
-Data *DataVec::getMaxPairsDNR()
+Data *DataVec::getMaxPairsDNR()                                                     //proved
 {
     if(d1r!=nullptr&&d2r!=nullptr&&d3r!=nullptr){
             if(d1r->pairs()>d2r->pairs()&&d1r->pairs()>d3r->pairs())
@@ -606,14 +606,14 @@ Data *DataVec::getMaxPairsDNR()
     return d1p;//返回d1p说明无其他dnr
 }
 
-Data *DataVec::getMaxPairsDNX()
+Data *DataVec::getMaxPairsDNX()                                                     //proved
 {
     if(getMaxPairsDNP()->pairs() >= getMaxPairsDNR()->pairs())
         return getMaxPairsDNP();
     else return getMaxPairsDNR();
 }
 
-double DataVec::getCountsPoints()                   //proved
+double DataVec::getCountsPoints()                                                   //proved，最小二乘法用
 {
     //计算各x定义标定点的循环次数，以d1p的x为基础定点，所以要求为第一列正行程必须为覆盖全自变量x的完整队列
     //否则将引入较麻烦的算法实现
@@ -747,7 +747,7 @@ double DataVec::getCountsPoints()                   //proved
     return qSqrt(stD4All);
 }
 
-double DataVec::getCountsPoints2()
+double DataVec::getCountsPoints2()              //proved,两端点法采用
 {
     Data *dnp = getMaxPairsDNP();
     Data *dnr = getMaxPairsDNR();
@@ -871,7 +871,7 @@ double DataVec::getCountsPoints2()
     return qSqrt(stD4All);
 }
 
-double DataVec::deltaHyster2()                                                       //proved 算法待证实
+double DataVec::deltaHyster2()                                                       //proved ，未采用
 {
     //考虑到是成对输入构造Data函数，所以如果某列中缺单个数，会导致各列y的数值对应x不同（即错位），所以初版要求中间不能空数,下面是新算法
     //要保证不错位的话，则需要判断对应x相同，在计算正反行程的偏差前需添加if(dnp->x[i] == dnr->x[i]),但这也可能错位，故使用反行程用，dnr->[j]
@@ -915,7 +915,7 @@ double DataVec::deltaHyster2()                                                  
     return (sum[0] + sum[1] + sum[2]) / sum[3];
 }
 
-double DataVec::deltaHyster()                                       //proved
+double DataVec::deltaHyster()                                       //proved        已采用
 {
     double temp = 0;
     int counts1 = 0;
@@ -1065,12 +1065,12 @@ double DataVec::Hyster(double &b1)                                              
     return deltaHyster() / fullScale(b1) * 100;
 }
 
-double DataVec::Repeat(double &b1, int a)
+double DataVec::Repeat(double &b1, int a)                                           //proved
 {
     return getCountsPoints() * a * 100 / fullScale(b1);
 }
 
-double DataVec::Repeat2(double &b1, int a)
+double DataVec::Repeat2(double &b1, int a)                                          //proved
 {
     return getCountsPoints2() * a * 100 / fullScale(b1);
 }
@@ -1201,7 +1201,7 @@ void DataVec::BiP(QVector<double> &b)// 量程上下限两点确定直线,此处
 }
 
 
-double average(double x, int num)
+double average(double x, int num)                                                   // not used yet
 {
     return x / (double)num;
 }

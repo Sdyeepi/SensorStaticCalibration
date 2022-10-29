@@ -25,7 +25,7 @@ QStringList &datastream::getContentList()
 bool datastream::ReadTxt()
 {
     QFile file(path);
-    //qDebug()<<"path:"<<path;//看看输出什么
+    //qDebug()<<"path:"<<path;
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QMessageBox::warning(NULL, QString("出错了"), QString("文件打开失败"));
         return 0;

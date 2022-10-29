@@ -56,8 +56,8 @@ public:
     double DataVecMin_Y();//暂时不想实现
     double fullScale(double &b1);//y=b0+b1*x，只需要斜率
     double predict_y(double &b0, double &b1, double x);//通过拟合直线和自变量x求出的y的估计值
-    double deltaLmax(double &b0, double &b1);//同上，最大偏差的求法
-    double deltaLmax2(double &b0, double &b1);
+    double deltaLmax(double &b0, double &b1);
+    double deltaLmax2(double &b0, double &b1);//同上，最大偏差的求法，已不采用
     double Line(double &b0, double &b1); //线性度Linearity,理想线性输入y=b0+b1*x;
     Data* getMaxPairsDNP();//得到正行程中行数最多的dnp列，作为实现getCountsPoints新需求的方法
     Data* getMaxPairsDNR();//得到反行程中行数最多的dnr列，作为实现getCountsPoints新需求的方法
