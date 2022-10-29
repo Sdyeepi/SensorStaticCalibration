@@ -1469,12 +1469,12 @@
     <property name="title">
      <string>菜单</string>
     </property>
-    <addaction name="action2131"/>
+    <addaction name="action_datain"/>
    </widget>
    <addaction name="menu1"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action2131">
+  <action name="action_datain">
    <property name="text">
     <string>导入数据</string>
    </property>

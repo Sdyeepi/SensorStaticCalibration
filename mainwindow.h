@@ -6,14 +6,16 @@
 #include <QString>
 #include <QDebug>
 #include "data.h"
+#include "datastream.h"
 #include <QPointF>
 #include <QChart>
 #include <QValueAxis>
 #include <QChartView>
 #include <QLineSeries>
 #include <QColor>
+#include <QDir>
 #include <QPointer>
-
+#include <QFileDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,16 +33,25 @@ public:
     void BiPShow(QVector<double> &b, DataVec &dvbit);
     void gVOriShow(DataVec &dv);
     void gVLsmBipShow(QVector<double> &bs, DataVec &dv);
+    void Row1lEditTxt(const int &col, const QStringList &strList);
+    void Row2lEditTxt(const int &col, const QStringList &strList);
+    void Row3lEditTxt(const int &col, const QStringList &strList);
+    void Row4lEditTxt(const int &col, const QStringList &strList);
+    void Row5lEditTxt(const int &col, const QStringList &strList);
+    void Row6lEditTxt(const int &col, const QStringList &strList);
+    void Row7lEditTxt(const int &col, const QStringList &strList);
+    void Row8lEditTxt(const int &col, const QStringList &strList);
+    void LineEditALLTXT(int &rJd, const int &col, const QVector<QStringList> strListVec);
 
 private slots:
-    void on_lineEdit11_textEdited(const QString &arg1);
-    void on_lineEdit21_textEdited(const QString &arg1);
-    void on_lineEdit31_textEdited(const QString &arg1);
-    void on_lineEdit41_textEdited(const QString &arg1);
-    void on_lineEdit51_textEdited(const QString &arg1);
-    void on_lineEdit61_textEdited(const QString &arg1);
-    void on_lineEdit71_textEdited(const QString &arg1);
-    void on_lineEdit81_textEdited(const QString &arg1);
+    void on_lineEdit11_textChanged(const QString &arg1);
+    void on_lineEdit21_textChanged(const QString &arg1);
+    void on_lineEdit31_textChanged(const QString &arg1);
+    void on_lineEdit41_textChanged(const QString &arg1);
+    void on_lineEdit51_textChanged(const QString &arg1);
+    void on_lineEdit61_textChanged(const QString &arg1);
+    void on_lineEdit71_textChanged(const QString &arg1);
+    void on_lineEdit81_textChanged(const QString &arg1);
 
     void on_lineEdit12_textChanged(const QString &arg1);
     void on_lineEdit22_textChanged(const QString &arg1);
@@ -96,19 +107,16 @@ private slots:
     void on_lineEdit77_textChanged(const QString &arg1);
     void on_lineEdit87_textChanged(const QString &arg1);
 
+    void on_pBtn1pVis_clicked();
+    void on_pBtn1rVis_clicked();
+    void on_pBtn2pVis_clicked();
+    void on_pBtn2rVis_clicked();
+    void on_pBtn3pVis_clicked();
+    void on_pBtn3rVis_clicked();
+
     void on_pBtnUpdate_clicked();
 
-    void on_pBtn1pVis_clicked();
-
-    void on_pBtn1rVis_clicked();
-
-    void on_pBtn2pVis_clicked();
-
-    void on_pBtn2rVis_clicked();
-
-    void on_pBtn3pVis_clicked();
-
-    void on_pBtn3rVis_clicked();
+    void on_Menu1_action_datain_clicked();
 
 private:
     Ui::MainWindow *ui;

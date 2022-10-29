@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     y2r.resize(8);
     y3r.resize(8);
     bs.resize(4);//储存lsm 12以及bip 34的4个b参数
+    connect(ui->action_datain, &QAction::triggered, this, &::MainWindow::on_Menu1_action_datain_clicked);
 }
 
 MainWindow::~MainWindow()
@@ -106,37 +107,230 @@ void MainWindow::gVLsmBipShow(QVector<double> &bs, DataVec &dv)
     ui->gViewLsmBip->setRubberBand(QChartView::RectangleRubberBand);
 }
 
+void MainWindow::Row1lEditTxt(const int &col, const QStringList &strList)
+{
+    switch (col) {
+    case 7:
+        ui->lineEdit17->setText(strList[6]);
+    case 6:
+        ui->lineEdit16->setText(strList[5]);
+    case 5:
+        ui->lineEdit15->setText(strList[4]);
+    case 4:
+        ui->lineEdit14->setText(strList[3]);
+    case 3:
+        ui->lineEdit13->setText(strList[2]);
+    case 2:
+        ui->lineEdit12->setText(strList[1]);
+    case 1:
+        ui->lineEdit11->setText(strList[0]);
+    default:
+        break;
+    }
+}
+void MainWindow::Row2lEditTxt(const int &col, const QStringList &strList)
+{
+    switch (col) {
+    case 7:
+        ui->lineEdit27->setText(strList[6]);
+    case 6:
+        ui->lineEdit26->setText(strList[5]);
+    case 5:
+        ui->lineEdit25->setText(strList[4]);
+    case 4:
+        ui->lineEdit24->setText(strList[3]);
+    case 3:
+        ui->lineEdit23->setText(strList[2]);
+    case 2:
+        ui->lineEdit22->setText(strList[1]);
+    case 1:
+        ui->lineEdit21->setText(strList[0]);
+    default:
+        break;
+    }
+}
+void MainWindow::Row3lEditTxt(const int &col, const QStringList &strList)
+{
+    switch (col) {
+    case 7:
+        ui->lineEdit37->setText(strList[6]);
+    case 6:
+        ui->lineEdit36->setText(strList[5]);
+    case 5:
+        ui->lineEdit35->setText(strList[4]);
+    case 4:
+        ui->lineEdit34->setText(strList[3]);
+    case 3:
+        ui->lineEdit33->setText(strList[2]);
+    case 2:
+        ui->lineEdit32->setText(strList[1]);
+    case 1:
+        ui->lineEdit31->setText(strList[0]);
+    default:
+        break;
+    }
+}
+void MainWindow::Row4lEditTxt(const int &col, const QStringList &strList)
+{
+    switch (col) {
+    case 7:
+        ui->lineEdit47->setText(strList[6]);
+    case 6:
+        ui->lineEdit46->setText(strList[5]);
+    case 5:
+        ui->lineEdit45->setText(strList[4]);
+    case 4:
+        ui->lineEdit44->setText(strList[3]);
+    case 3:
+        ui->lineEdit43->setText(strList[2]);
+    case 2:
+        ui->lineEdit42->setText(strList[1]);
+    case 1:
+        ui->lineEdit41->setText(strList[0]);
+    default:
+        break;
+    }
+}
+void MainWindow::Row5lEditTxt(const int &col, const QStringList &strList)
+{
+    switch (col) {
+    case 7:
+        ui->lineEdit57->setText(strList[6]);
+    case 6:
+        ui->lineEdit56->setText(strList[5]);
+    case 5:
+        ui->lineEdit55->setText(strList[4]);
+    case 4:
+        ui->lineEdit54->setText(strList[3]);
+    case 3:
+        ui->lineEdit53->setText(strList[2]);
+    case 2:
+        ui->lineEdit52->setText(strList[1]);
+    case 1:
+        ui->lineEdit51->setText(strList[0]);
+    default:
+        break;
+    }
+}
+void MainWindow::Row6lEditTxt(const int &col, const QStringList &strList)
+{
+    switch (col) {
+    case 7:
+        ui->lineEdit67->setText(strList[6]);
+    case 6:
+        ui->lineEdit66->setText(strList[5]);
+    case 5:
+        ui->lineEdit65->setText(strList[4]);
+    case 4:
+        ui->lineEdit64->setText(strList[3]);
+    case 3:
+        ui->lineEdit63->setText(strList[2]);
+    case 2:
+        ui->lineEdit62->setText(strList[1]);
+    case 1:
+        ui->lineEdit61->setText(strList[0]);
+    default:
+        break;
+    }
+}
+void MainWindow::Row7lEditTxt(const int &col, const QStringList &strList)
+{
+    switch (col) {
+    case 7:
+        ui->lineEdit77->setText(strList[6]);
+    case 6:
+        ui->lineEdit76->setText(strList[5]);
+    case 5:
+        ui->lineEdit75->setText(strList[4]);
+    case 4:
+        ui->lineEdit74->setText(strList[3]);
+    case 3:
+        ui->lineEdit73->setText(strList[2]);
+    case 2:
+        ui->lineEdit72->setText(strList[1]);
+    case 1:
+        ui->lineEdit71->setText(strList[0]);
+    default:
+        break;
+    }
+}
+void MainWindow::Row8lEditTxt(const int &col, const QStringList &strList)
+{
+    switch (col) {
+    case 7:
+        ui->lineEdit87->setText(strList[6]);
+    case 6:
+        ui->lineEdit86->setText(strList[5]);
+    case 5:
+        ui->lineEdit85->setText(strList[4]);
+    case 4:
+        ui->lineEdit84->setText(strList[3]);
+    case 3:
+        ui->lineEdit83->setText(strList[2]);
+    case 2:
+        ui->lineEdit82->setText(strList[1]);
+    case 1:
+        ui->lineEdit81->setText(strList[0]);
+    default:
+        break;
+    }
+}
 
-//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
-void MainWindow::on_lineEdit11_textEdited(const QString &arg1)
+void MainWindow::LineEditALLTXT(int &rJd, const int &col, const QVector<QStringList> strListVec)
+{
+    switch (rJd) {
+    case 7:
+        Row8lEditTxt(col, strListVec[7]);
+    case 6:
+        Row7lEditTxt(col, strListVec[6]);
+    case 5:
+        Row6lEditTxt(col, strListVec[5]);
+    case 4:
+        Row5lEditTxt(col, strListVec[4]);
+    case 3:
+        Row4lEditTxt(col, strListVec[3]);
+    case 2:
+        Row3lEditTxt(col, strListVec[2]);
+    case 1:
+        Row2lEditTxt(col, strListVec[1]);
+    case 0:
+        Row1lEditTxt(col, strListVec[0]);
+    default:
+        break;
+    }
+}
+
+
+//8
+void MainWindow::on_lineEdit11_textChanged(const QString &arg1)
 {
     x[0] = ui->lineEdit11->text();
 }
-void MainWindow::on_lineEdit21_textEdited(const QString &arg1)
+void MainWindow::on_lineEdit21_textChanged(const QString &arg1)
 {
     x[1] = ui->lineEdit21->text();
 }
-void MainWindow::on_lineEdit31_textEdited(const QString &arg1)
+void MainWindow::on_lineEdit31_textChanged(const QString &arg1)
 {
     x[2] = ui->lineEdit31->text();
 }
-void MainWindow::on_lineEdit41_textEdited(const QString &arg1)
+void MainWindow::on_lineEdit41_textChanged(const QString &arg1)
 {
     x[3] = ui->lineEdit41->text();
 }
-void MainWindow::on_lineEdit51_textEdited(const QString &arg1)
+void MainWindow::on_lineEdit51_textChanged(const QString &arg1)
 {
     x[4] = ui->lineEdit51->text();
 }
-void MainWindow::on_lineEdit61_textEdited(const QString &arg1)
+void MainWindow::on_lineEdit61_textChanged(const QString &arg1)
 {
     x[5] = ui->lineEdit61->text();
 }
-void MainWindow::on_lineEdit71_textEdited(const QString &arg1)
+void MainWindow::on_lineEdit71_textChanged(const QString &arg1)
 {
     x[6] = ui->lineEdit71->text();
 }
-void MainWindow::on_lineEdit81_textEdited(const QString &arg1)
+void MainWindow::on_lineEdit81_textChanged(const QString &arg1)
 {
     x[7] = ui->lineEdit81->text();
 }
@@ -416,6 +610,24 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     }
 }
 
+void MainWindow::on_Menu1_action_datain_clicked()
+{
+    QString path = QDir::currentPath();
+    QString filter = "文本(*.txt *.md);;CSV文件(*.csv);;全部(*.*)";
+    QString fname = QFileDialog::getOpenFileName(this, "查找文件路径", path, filter);
+    datastream des(fname);
+    des.ReadTxt();
+    des.transferTxt2Forms();
+    if(des.ctnparts[0][0] == NULL){
+        QMessageBox::warning(NULL, QString("出错了"), QString("数据为空"));
+        return;
+    }
+    int row = des.ctnparts.size();
+    for(int rJudge = 0;rJudge < row;rJudge++){
+        int column = des.ctnparts[rJudge].size();
+        LineEditALLTXT(rJudge, column, des.ctnparts);
+    }
+}
 
 
 void MainWindow::on_pBtn1pVis_clicked()

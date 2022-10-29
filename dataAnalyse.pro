@@ -11,11 +11,13 @@ CONFIG += c++17
 
 SOURCES += \
     data.cpp \
+    datastream.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     data.h \
+    datastream.h \
     mainwindow.h
 
 FORMS += \
