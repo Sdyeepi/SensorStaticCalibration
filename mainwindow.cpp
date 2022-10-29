@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     y3r.resize(8);
     bs.resize(4);//储存lsm 12以及bip 34的4个b参数
     connect(ui->action_datain, &QAction::triggered, this, &::MainWindow::on_Menu1_action_datain_clicked);
+    connect(ui->action_dataout, &QAction::triggered, this, &::MainWindow::on_Menu1_action_dataout_clicked);
 }
 
 MainWindow::~MainWindow()
@@ -298,6 +299,32 @@ void MainWindow::LineEditALLTXT(int &rJd, const int &col, const QVector<QStringL
     default:
         break;
     }
+}
+
+void MainWindow::GetAllLineEditTxt(QStringList &datalist)
+{
+
+    for(int i =0; i < 7; i++){
+        datalist<<x[i]<<"\t";
+        datalist<<y1p[i]<<"\t";
+        datalist<<y1r[i]<<"\t";
+        datalist<<y2p[i]<<"\t";
+        datalist<<y2r[i]<<"\t";
+        datalist<<y3p[i]<<"\t";
+        datalist<<y3r[i]<<"\n";
+     }
+    datalist<<"\n";
+    datalist<<"\n\n注意:若要导入此数据请将下方所有内容删除\n";
+    datalist<<"最小二乘曲线为: y = "<<ui->lineEditLsmB1->text()<<"x + ("<<ui->lineEditLsmB0->text()<<")\t";
+    datalist<<"\t满量程输出: "<<ui->lineEditLsmFS->text()<<"\n";
+    datalist<<"\t非线性度: "<<ui->lineEditLsmLine->text()<<"%\t";
+    datalist<<"迟滞性: "<<ui->lineEditLsmHysteria->text()<<"%\t";
+    datalist<<"重复性: "<<ui->lineEditLsmRepeat->text()<<"%\n";
+    datalist<<"两端点法曲线为: y = "<<ui->lineEditBiPB1->text()<<"x + ("<<ui->lineEditBiPB0->text()<<")\t";
+    datalist<<"\t满量程输出: "<<ui->lineEditBiPFS->text()<<"\n";
+    datalist<<"\t非线性度: "<<ui->lineEditBiPLine->text()<<"%\t";
+    datalist<<"迟滞性: "<<ui->lineEditBiPHysteria->text()<<"%\t";
+    datalist<<"重复性: "<<ui->lineEditBiPRepeat->text()<<"%\n";
 }
 
 
@@ -627,6 +654,17 @@ void MainWindow::on_Menu1_action_datain_clicked()
         int column = des.ctnparts[rJudge].size();
         LineEditALLTXT(rJudge, column, des.ctnparts);
     }
+}
+
+void MainWindow::on_Menu1_action_dataout_clicked()
+{
+    QStringList datalist;
+    GetAllLineEditTxt(datalist);
+    QFile file;
+    file.setFileName(QFileDialog::getSaveFileName(NULL, QString("保存路径"), QString("/"), QString("文本(*.txt)")));
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    file.write(datalist.join("").toUtf8());
+    file.close();
 }
 
 

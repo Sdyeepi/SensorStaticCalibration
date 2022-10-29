@@ -33,6 +33,7 @@ public:
     void BiPShow(QVector<double> &b, DataVec &dvbit);
     void gVOriShow(DataVec &dv);
     void gVLsmBipShow(QVector<double> &bs, DataVec &dv);
+
     void Row1lEditTxt(const int &col, const QStringList &strList);
     void Row2lEditTxt(const int &col, const QStringList &strList);
     void Row3lEditTxt(const int &col, const QStringList &strList);
@@ -42,6 +43,8 @@ public:
     void Row7lEditTxt(const int &col, const QStringList &strList);
     void Row8lEditTxt(const int &col, const QStringList &strList);
     void LineEditALLTXT(int &rJd, const int &col, const QVector<QStringList> strListVec);
+
+    void GetAllLineEditTxt(QStringList& datalist);
 
 private slots:
     void on_lineEdit11_textChanged(const QString &arg1);
@@ -117,6 +120,7 @@ private slots:
     void on_pBtnUpdate_clicked();
 
     void on_Menu1_action_datain_clicked();
+    void on_Menu1_action_dataout_clicked();
 
 private:
     Ui::MainWindow *ui;

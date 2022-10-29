@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>SensorStaticCalibration</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="gBoxInput">
@@ -137,7 +137,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="labelx">
        <property name="text">
-        <string>单位</string>
+        <string>输入</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1328,6 +1328,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -1337,13 +1340,19 @@
      </rect>
     </property>
     <property name="toolTip">
-     <string>若无法访问请使用vpn工具</string>
+     <string/>
+    </property>
+    <property name="inputMask">
+     <string notr="true"/>
     </property>
     <property name="text">
-     <string>代码见本人项目地址    https://github.com/Sdyeepi/SensorStaticCalibration</string>
+     <string notr="true">代码见本人项目地址    https://github.com/Sdyeepi/SensorStaticCalibration</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QtCharts::QChartView" name="gViewLsmBip">
@@ -1470,6 +1479,7 @@
      <string>菜单</string>
     </property>
     <addaction name="action_datain"/>
+    <addaction name="action_dataout"/>
    </widget>
    <addaction name="menu1"/>
   </widget>
@@ -1477,6 +1487,14 @@
   <action name="action_datain">
    <property name="text">
     <string>导入数据</string>
+   </property>
+  </action>
+  <action name="action_dataout">
+   <property name="text">
+    <string>导出数据</string>
+   </property>
+   <property name="toolTip">
+    <string>导出数据</string>
    </property>
   </action>
  </widget>

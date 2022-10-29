@@ -22,7 +22,6 @@ public:
     QStringList& getContentList();
     QStringList& getContentParts();
     void ReadTxt();
-    void WriteTxt(QStringList& outputList);
     void transferTxt2Forms();//用正则表达式
 private:
     QString path;
