@@ -643,9 +643,10 @@ void MainWindow::on_Menu1_action_datain_clicked()
     QString filter = "文本(*.txt *.md);;CSV文件(*.csv);;全部(*.*)";
     QString fname = QFileDialog::getOpenFileName(this, "查找文件路径", path, filter);
     datastream des(fname);
-    des.ReadTxt();
+    if(!des.ReadTxt())
+        return;
     des.transferTxt2Forms();
-    if(des.ctnparts[0][0] == NULL){
+    if(des.ctnparts.isEmpty()){
         QMessageBox::warning(NULL, QString("出错了"), QString("数据为空"));
         return;
     }

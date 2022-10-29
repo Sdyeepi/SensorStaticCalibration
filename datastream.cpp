@@ -22,18 +22,19 @@ QStringList &datastream::getContentList()
     return ctnList;
 }
 
-void datastream::ReadTxt()
+bool datastream::ReadTxt()
 {
     QFile file(path);
     //qDebug()<<"path:"<<path;//看看输出什么
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QMessageBox::warning(NULL, QString("出错了"), QString("文件打开失败"));
-        return;
+        return 0;
     }
     QTextStream in(&file);
     while(!in.atEnd()){
         ctnList.append(in.readLine());
     }
+    return 1;
     //qDebug()<<"contentList:"<<ctnList;
 }
 

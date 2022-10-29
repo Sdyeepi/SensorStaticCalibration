@@ -21,7 +21,7 @@ public:
     QString getPath();
     QStringList& getContentList();
     QStringList& getContentParts();
-    void ReadTxt();
+    bool ReadTxt();
     void transferTxt2Forms();//用正则表达式
 private:
     QString path;
