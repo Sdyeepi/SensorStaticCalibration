@@ -6,13 +6,13 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    x.resize(8);
-    y1p.resize(8);
-    y2p.resize(8);
-    y3p.resize(8);
-    y1r.resize(8);
-    y2r.resize(8);
-    y3r.resize(8);
+    x.resize(9);
+    y1p.resize(9);
+    y2p.resize(9);
+    y3p.resize(9);
+    y1r.resize(9);
+    y2r.resize(9);
+    y3r.resize(9);
     bs.resize(4);//储存lsm 12以及bip 34的4个b参数
     connect(ui->action_datain, &QAction::triggered, this, &::MainWindow::on_Menu1_action_datain_clicked);
     connect(ui->action_dataout, &QAction::triggered, this, &::MainWindow::on_Menu1_action_dataout_clicked);
@@ -30,29 +30,29 @@ MainWindow::~MainWindow()
 
 void MainWindow::LsmShow(QVector<double> &bs, DataVec &dvlsm){
     dvlsm.Lsm(bs);
-    ui->lineEditLsmB0->setText(QString::number(bs[0], 'g', 3));
-    ui->lineEditLsmB1->setText(QString::number(bs[1], 'g', 3));
-    ui->lineEditLsmFS->setText(QString::number(dvlsm.fullScale(bs[1]), 'g', 2));
-    ui->lineEditLsmLine->setText(QString::number(dvlsm.Line(bs[0], bs[1]), 'g', 2));
-    ui->lineEditLsmHysteria->setText(QString::number(dvlsm.Hyster(bs[1]), 'g', 2));
+    ui->lineEditLsmB0->setText(QString::number(bs[0], 'f', 2));
+    ui->lineEditLsmB1->setText(QString::number(bs[1], 'f', 2));
+    ui->lineEditLsmFS->setText(QString::number(dvlsm.fullScale(bs[1]), 'f', 2));
+    ui->lineEditLsmLine->setText(QString::number(dvlsm.Line(bs[0], bs[1]), 'f', 2));
+    ui->lineEditLsmHysteria->setText(QString::number(dvlsm.Hyster(bs[1]), 'f', 2));
     float k = ui->lineEditK->text().toFloat();
     if(k)
-        ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1],k),'g',2));
-    else ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1]),'g',2));
+        ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1],k),'f',2));
+    else ui->lineEditLsmRepeat->setText(QString::number(dvlsm.Repeat(bs[1]),'f',2));
 }
 
 void MainWindow::BiPShow(QVector<double> &bs, DataVec &dvbip)
 {
     dvbip.BiP(bs);
-    ui->lineEditBiPB0->setText(QString::number(bs[2], 'g', 3));
-    ui->lineEditBiPB1->setText(QString::number(bs[3], 'g', 3));
-    ui->lineEditBiPFS->setText(QString::number(dvbip.fullScale(bs[3]), 'g', 2));
-    ui->lineEditBiPLine->setText(QString::number(dvbip.Line(bs[2], bs[3]), 'g', 2));
-    ui->lineEditBiPHysteria->setText(QString::number(dvbip.Hyster(bs[3]), 'g', 2));
+    ui->lineEditBiPB0->setText(QString::number(bs[2], 'f', 2));
+    ui->lineEditBiPB1->setText(QString::number(bs[3], 'f', 2));
+    ui->lineEditBiPFS->setText(QString::number(dvbip.fullScale(bs[3]), 'f', 2));
+    ui->lineEditBiPLine->setText(QString::number(dvbip.Line(bs[2], bs[3]), 'f', 2));
+    ui->lineEditBiPHysteria->setText(QString::number(dvbip.Hyster(bs[3]), 'f', 2));
     float k = ui->lineEditK->text().toFloat();
     if(k)
-        ui->lineEditBiPRepeat->setText(QString::number(dvbip.Repeat2(bs[3],k),'g',2));
-    else ui->lineEditBiPRepeat->setText(QString::number(dvbip.Repeat2(bs[3]),'g',2));
+        ui->lineEditBiPRepeat->setText(QString::number(dvbip.Repeat2(bs[3],k),'f',2));
+    else ui->lineEditBiPRepeat->setText(QString::number(dvbip.Repeat2(bs[3]),'f',2));
 }
 
 void MainWindow::gVOriShow(DataVec &dv)
@@ -277,9 +277,33 @@ void MainWindow::Row8lEditTxt(const int &col, const QStringList &strList)
     }
 }
 
+void MainWindow::Row9lEditTxt(const int &col, const QStringList &strList)
+{
+    switch (col) {
+    case 7:
+        ui->lineEdit97->setText(strList[6]);
+    case 6:
+        ui->lineEdit96->setText(strList[5]);
+    case 5:
+        ui->lineEdit95->setText(strList[4]);
+    case 4:
+        ui->lineEdit94->setText(strList[3]);
+    case 3:
+        ui->lineEdit93->setText(strList[2]);
+    case 2:
+        ui->lineEdit92->setText(strList[1]);
+    case 1:
+        ui->lineEdit91->setText(strList[0]);
+    default:
+        break;
+    }
+}
+
 void MainWindow::LineEditALLTXT(int &rJd, const int &col, const QVector<QStringList> strListVec)
 {
     switch (rJd) {
+    case 8:
+        Row9lEditTxt(col, strListVec[8]);
     case 7:
         Row8lEditTxt(col, strListVec[7]);
     case 6:
@@ -304,7 +328,7 @@ void MainWindow::LineEditALLTXT(int &rJd, const int &col, const QVector<QStringL
 void MainWindow::GetAllLineEditTxt(QStringList &datalist)
 {
 
-    for(int i =0; i < 7; i++){
+    for(int i =0; i < 9; i++){
         datalist<<x[i]<<"\t";
         datalist<<y1p[i]<<"\t";
         datalist<<y1r[i]<<"\t";
@@ -328,7 +352,7 @@ void MainWindow::GetAllLineEditTxt(QStringList &datalist)
 }
 
 
-//8
+//9,后面的什么insert方法早已不用，故不需要那么做，但懒得删了。版本只改了数字代表行数
 void MainWindow::on_lineEdit11_textChanged(const QString &arg1)
 {
     x[0] = ui->lineEdit11->text();
@@ -361,8 +385,12 @@ void MainWindow::on_lineEdit81_textChanged(const QString &arg1)
 {
     x[7] = ui->lineEdit81->text();
 }
+void MainWindow::on_lineEdit91_textChanged(const QString &arg1)
+{
+    x[8] = ui->lineEdit91->text();
+}
 
-//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
+//采用了vector的insert方法，目前为9，故最后应将vector的第9个以后（不含9）的元素删除
 void MainWindow::on_lineEdit12_textChanged(const QString &arg1)
 {
     y1p[0] = ui->lineEdit12->text();
@@ -395,8 +423,12 @@ void MainWindow::on_lineEdit82_textChanged(const QString &arg1)
 {
     y1p[7] = ui->lineEdit82->text();
 }
+void MainWindow::on_lineEdit92_textChanged(const QString &arg1)
+{
+    y1p[8] = ui->lineEdit92->text();
+}
 
-//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
+//采用了vector的insert方法，目前为9，故最后应将vector的第9个以后（不含9）的元素删除
 void MainWindow::on_lineEdit13_textChanged(const QString &arg1)
 {
     y1r[0] = ui->lineEdit13->text();
@@ -429,8 +461,12 @@ void MainWindow::on_lineEdit83_textChanged(const QString &arg1)
 {
     y1r[7] = ui->lineEdit83->text();
 }
+void MainWindow::on_lineEdit93_textChanged(const QString &arg1)
+{
+    y1r[8] = ui->lineEdit93->text();
+}
 
-//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
+//采用了vector的insert方法，目前为9，故最后应将vector的第9个以后（不含9）的元素删除
 void MainWindow::on_lineEdit14_textChanged(const QString &arg1)
 {
     y2p[0] = ui->lineEdit14->text();
@@ -463,8 +499,12 @@ void MainWindow::on_lineEdit84_textChanged(const QString &arg1)
 {
     y2p[7] = ui->lineEdit84->text();
 }
+void MainWindow::on_lineEdit94_textChanged(const QString &arg1)
+{
+    y2p[8] = ui->lineEdit94->text();
+}
 
-//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
+//采用了vector的insert方法，目前为9，故最后应将vector的第9个以后（不含9）的元素删除
 void MainWindow::on_lineEdit15_textChanged(const QString &arg1)
 {
     y2r[0] = ui->lineEdit15->text();
@@ -497,8 +537,12 @@ void MainWindow::on_lineEdit85_textChanged(const QString &arg1)
 {
     y2r[7] = ui->lineEdit85->text();
 }
+void MainWindow::on_lineEdit95_textChanged(const QString &arg1)
+{
+    y2r[8] = ui->lineEdit95->text();
+}
 
-//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
+//采用了vector的insert方法，目前为9，故最后应将vector的第9个以后（不含9）的元素删除
 void MainWindow::on_lineEdit16_textChanged(const QString &arg1)
 {
     y3p[0] = ui->lineEdit16->text();
@@ -531,8 +575,12 @@ void MainWindow::on_lineEdit86_textChanged(const QString &arg1)
 {
     y3p[7] = ui->lineEdit86->text();
 }
+void MainWindow::on_lineEdit96_textChanged(const QString &arg1)
+{
+    y3p[8] = ui->lineEdit96->text();
+}
 
-//采用了vector的insert方法，目前为8，故最后应将vector的第8个以后（不含8）的元素删除
+//采用了vector的insert方法，目前为9，故最后应将vector的第9个以后（不含9）的元素删除
 void MainWindow::on_lineEdit17_textChanged(const QString &arg1)
 {
     y3r[0] = ui->lineEdit17->text();
@@ -564,6 +612,10 @@ void MainWindow::on_lineEdit77_textChanged(const QString &arg1)
 void MainWindow::on_lineEdit87_textChanged(const QString &arg1)
 {
     y3r[7] = ui->lineEdit87->text();
+}
+void MainWindow::on_lineEdit97_textChanged(const QString &arg1)
+{
+    y3r[8] = ui->lineEdit97->text();
 }
 
 
@@ -633,7 +685,6 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
         LsmShow(bs,dv);
         BiPShow(bs,dv);
         gVLsmBipShow(bs,dv);
-        qDebug()<<bs;
     }
 }
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1192</width>
-    <height>873</height>
+    <height>888</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>0</y>
       <width>581</width>
-      <height>351</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="title">
@@ -30,176 +30,6 @@
      <set>Qt::AlignCenter</set>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="6" column="0">
-      <widget class="QLineEdit" name="lineEdit51">
-       <property name="font">
-        <font>
-         <family>方正粗黑宋简体</family>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="5" colspan="2">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>第三次</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="6">
-      <widget class="QLineEdit" name="lineEdit27">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="3">
-      <widget class="QLineEdit" name="lineEdit24">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="QLineEdit" name="lineEdit72">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLineEdit" name="lineEdit41">
-       <property name="font">
-        <font>
-         <family>方正粗黑宋简体</family>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="2">
-      <widget class="QLineEdit" name="lineEdit63">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="lineEdit52">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="labelx">
-       <property name="text">
-        <string>输入</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="2">
-      <widget class="QLineEdit" name="lineEdit53">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="lineEdit22">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="5">
-      <widget class="QLineEdit" name="lineEdit66">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="4">
-      <widget class="QLineEdit" name="lineEdit15">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="3" colspan="2">
       <widget class="QLabel" name="label_2">
        <property name="text">
@@ -210,156 +40,18 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="3">
-      <widget class="QLineEdit" name="lineEdit34">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QLineEdit" name="lineEdit33">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLineEdit" name="lineEdit71">
-       <property name="font">
-        <font>
-         <family>方正粗黑宋简体</family>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="4">
-      <widget class="QLineEdit" name="lineEdit65">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="4">
-      <widget class="QLineEdit" name="lineEdit35">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="6">
-      <widget class="QLineEdit" name="lineEdit87">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="6">
-      <widget class="QLineEdit" name="lineEdit37">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="5">
-      <widget class="QLabel" name="label_p3">
+     <item row="0" column="1" colspan="2">
+      <widget class="QLabel" name="label_1">
        <property name="text">
-        <string>正程</string>
+        <string>第一次</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="lineEdit32">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QLineEdit" name="lineEdit42">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="6">
-      <widget class="QLineEdit" name="lineEdit17">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="3">
-      <widget class="QLineEdit" name="lineEdit74">
+     <item row="6" column="6">
+      <widget class="QLineEdit" name="lineEdit57">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -386,8 +78,8 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="1">
-      <widget class="QLineEdit" name="lineEdit82">
+     <item row="5" column="6">
+      <widget class="QLineEdit" name="lineEdit47">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -400,8 +92,36 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLineEdit" name="lineEdit21">
+     <item row="6" column="3">
+      <widget class="QLineEdit" name="lineEdit54">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="4">
+      <widget class="QLineEdit" name="lineEdit55">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLineEdit" name="lineEdit61">
        <property name="font">
         <font>
          <family>方正粗黑宋简体</family>
@@ -412,8 +132,142 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="6">
-      <widget class="QLineEdit" name="lineEdit57">
+     <item row="6" column="0">
+      <widget class="QLineEdit" name="lineEdit51">
+       <property name="font">
+        <font>
+         <family>方正粗黑宋简体</family>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="6">
+      <widget class="QLabel" name="label_r3">
+       <property name="text">
+        <string>回程</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="6">
+      <widget class="QLineEdit" name="lineEdit17">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="4">
+      <widget class="QLineEdit" name="lineEdit65">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="lineEdit42">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QLineEdit" name="lineEdit33">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QLineEdit" name="lineEdit62">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4">
+      <widget class="QLineEdit" name="lineEdit25">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <widget class="QLineEdit" name="lineEdit63">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="QLineEdit" name="lineEdit44">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QLineEdit" name="lineEdit24">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -454,13 +308,11 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="5">
-      <widget class="QLineEdit" name="lineEdit16">
+     <item row="3" column="0">
+      <widget class="QLineEdit" name="lineEdit21">
        <property name="font">
         <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
+         <family>方正粗黑宋简体</family>
         </font>
        </property>
        <property name="alignment">
@@ -468,13 +320,11 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="1">
-      <widget class="QLineEdit" name="lineEdit62">
+     <item row="4" column="0">
+      <widget class="QLineEdit" name="lineEdit31">
        <property name="font">
         <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
+         <family>方正粗黑宋简体</family>
         </font>
        </property>
        <property name="alignment">
@@ -482,10 +332,306 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="3">
-      <widget class="QLabel" name="label_p2">
+     <item row="9" column="0">
+      <widget class="QLineEdit" name="lineEdit81">
+       <property name="font">
+        <font>
+         <family>方正粗黑宋简体</family>
+         <pointsize>9</pointsize>
+         <italic>false</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="label_p1">
        <property name="text">
         <string>正程</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="5">
+      <widget class="QLineEdit" name="lineEdit26">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="lineEdit22">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <widget class="QLineEdit" name="lineEdit53">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="6">
+      <widget class="QLineEdit" name="lineEdit87">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="3">
+      <widget class="QLineEdit" name="lineEdit74">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelx">
+       <property name="text">
+        <string>输入</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="4">
+      <widget class="QLineEdit" name="lineEdit45">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="lineEdit23">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="label_r1">
+       <property name="text">
+        <string>回程</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lineEdit12">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="5">
+      <widget class="QLineEdit" name="lineEdit56">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="4">
+      <widget class="QLineEdit" name="lineEdit75">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="6">
+      <widget class="QLineEdit" name="lineEdit27">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="5">
+      <widget class="QLabel" name="label_p3">
+       <property name="text">
+        <string>正程</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="5">
+      <widget class="QLineEdit" name="lineEdit86">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="3">
+      <widget class="QLineEdit" name="lineEdit64">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="lineEdit32">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="4">
+      <widget class="QLineEdit" name="lineEdit15">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="5">
+      <widget class="QLineEdit" name="lineEdit46">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QLineEdit" name="lineEdit34">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="5">
+      <widget class="QLineEdit" name="lineEdit36">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -506,14 +652,118 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="0">
-      <widget class="QLineEdit" name="lineEdit81">
+     <item row="2" column="5">
+      <widget class="QLineEdit" name="lineEdit16">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <widget class="QLineEdit" name="lineEdit82">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QLineEdit" name="lineEdit72">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLineEdit" name="lineEdit71">
        <property name="font">
         <font>
          <family>方正粗黑宋简体</family>
-         <pointsize>9</pointsize>
-         <italic>false</italic>
         </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QLineEdit" name="lineEdit14">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="2">
+      <widget class="QLineEdit" name="lineEdit73">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLineEdit" name="lineEdit41">
+       <property name="font">
+        <font>
+         <family>方正粗黑宋简体</family>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="lineEdit52">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="5" colspan="2">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>第三次</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -546,226 +796,8 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
-      <widget class="QLineEdit" name="lineEdit13">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="4">
-      <widget class="QLineEdit" name="lineEdit45">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLineEdit" name="lineEdit31">
-       <property name="font">
-        <font>
-         <family>方正粗黑宋简体</family>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label_p1">
-       <property name="text">
-        <string>正程</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="6">
-      <widget class="QLineEdit" name="lineEdit47">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="4">
-      <widget class="QLineEdit" name="lineEdit75">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit12">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="label_r1">
-       <property name="text">
-        <string>回程</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="5">
-      <widget class="QLineEdit" name="lineEdit56">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="3">
-      <widget class="QLineEdit" name="lineEdit44">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="4">
-      <widget class="QLineEdit" name="lineEdit55">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" colspan="2">
-      <widget class="QLabel" name="label_1">
-       <property name="text">
-        <string>第一次</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QLineEdit" name="lineEdit14">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="QLineEdit" name="lineEdit61">
-       <property name="font">
-        <font>
-         <family>方正粗黑宋简体</family>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="2">
-      <widget class="QLineEdit" name="lineEdit73">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="4">
-      <widget class="QLineEdit" name="lineEdit25">
-       <property name="font">
-        <font>
-         <family>MS Sans Serif</family>
-         <pointsize>10</pointsize>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="6">
-      <widget class="QLabel" name="label_r3">
-       <property name="text">
-        <string>回程</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="3">
-      <widget class="QLineEdit" name="lineEdit54">
+     <item row="9" column="4">
+      <widget class="QLineEdit" name="lineEdit85">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -788,6 +820,34 @@
        </property>
       </widget>
      </item>
+     <item row="7" column="5">
+      <widget class="QLineEdit" name="lineEdit66">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="4">
+      <widget class="QLineEdit" name="lineEdit35">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
      <item row="8" column="6">
       <widget class="QLineEdit" name="lineEdit77">
        <property name="font">
@@ -802,8 +862,8 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="5">
-      <widget class="QLineEdit" name="lineEdit46">
+     <item row="2" column="2">
+      <widget class="QLineEdit" name="lineEdit13">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -816,8 +876,18 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="5">
-      <widget class="QLineEdit" name="lineEdit36">
+     <item row="1" column="3">
+      <widget class="QLabel" name="label_p2">
+       <property name="text">
+        <string>正程</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="6">
+      <widget class="QLineEdit" name="lineEdit37">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -830,8 +900,22 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="3">
-      <widget class="QLineEdit" name="lineEdit64">
+     <item row="10" column="0">
+      <widget class="QLineEdit" name="lineEdit91">
+       <property name="font">
+        <font>
+         <family>方正粗黑宋简体</family>
+         <pointsize>9</pointsize>
+         <italic>false</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QLineEdit" name="lineEdit92">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -844,8 +928,8 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="5">
-      <widget class="QLineEdit" name="lineEdit26">
+     <item row="10" column="2">
+      <widget class="QLineEdit" name="lineEdit93">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -858,8 +942,8 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="2">
-      <widget class="QLineEdit" name="lineEdit23">
+     <item row="10" column="3">
+      <widget class="QLineEdit" name="lineEdit94">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -872,8 +956,8 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="5">
-      <widget class="QLineEdit" name="lineEdit86">
+     <item row="10" column="4">
+      <widget class="QLineEdit" name="lineEdit95">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -886,8 +970,22 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="4">
-      <widget class="QLineEdit" name="lineEdit85">
+     <item row="10" column="5">
+      <widget class="QLineEdit" name="lineEdit96">
+       <property name="font">
+        <font>
+         <family>MS Sans Serif</family>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="6">
+      <widget class="QLineEdit" name="lineEdit97">
        <property name="font">
         <font>
          <family>MS Sans Serif</family>
@@ -906,9 +1004,9 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>10</y>
+      <y>0</y>
       <width>561</width>
-      <height>201</height>
+      <height>221</height>
      </rect>
     </property>
     <property name="title">
@@ -1086,7 +1184,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>400</y>
+      <y>410</y>
       <width>81</width>
       <height>29</height>
      </rect>
@@ -1102,7 +1200,7 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>400</y>
+      <y>410</y>
       <width>99</width>
       <height>29</height>
      </rect>
@@ -1118,7 +1216,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>400</y>
+      <y>410</y>
       <width>221</width>
       <height>25</height>
      </rect>
@@ -1136,7 +1234,7 @@
       <x>600</x>
       <y>220</y>
       <width>561</width>
-      <height>201</height>
+      <height>221</height>
      </rect>
     </property>
     <property name="title">
@@ -1193,16 +1291,6 @@
        </property>
        <property name="readOnly">
         <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="5">
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>%</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -1318,7 +1406,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>430</y>
+      <y>450</y>
       <width>571</width>
       <height>351</height>
      </rect>
@@ -1334,7 +1422,7 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>790</y>
+      <y>810</y>
       <width>771</width>
       <height>25</height>
      </rect>
@@ -1359,7 +1447,7 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>430</y>
+      <y>450</y>
       <width>571</width>
       <height>351</height>
      </rect>
@@ -1372,7 +1460,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>360</y>
+      <y>370</y>
       <width>71</width>
       <height>29</height>
      </rect>
@@ -1388,7 +1476,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>360</y>
+      <y>370</y>
       <width>71</width>
       <height>29</height>
      </rect>
@@ -1404,7 +1492,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>360</y>
+      <y>370</y>
       <width>71</width>
       <height>29</height>
      </rect>
@@ -1420,7 +1508,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>360</y>
+      <y>370</y>
       <width>71</width>
       <height>29</height>
      </rect>
@@ -1436,7 +1524,7 @@
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>360</y>
+      <y>370</y>
       <width>71</width>
       <height>29</height>
      </rect>
@@ -1452,7 +1540,7 @@
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>360</y>
+      <y>370</y>
       <width>71</width>
       <height>29</height>
      </rect>
@@ -1514,6 +1602,7 @@
   <tabstop>lineEdit61</tabstop>
   <tabstop>lineEdit71</tabstop>
   <tabstop>lineEdit81</tabstop>
+  <tabstop>lineEdit91</tabstop>
   <tabstop>lineEdit12</tabstop>
   <tabstop>lineEdit22</tabstop>
   <tabstop>lineEdit32</tabstop>
@@ -1522,6 +1611,7 @@
   <tabstop>lineEdit62</tabstop>
   <tabstop>lineEdit72</tabstop>
   <tabstop>lineEdit82</tabstop>
+  <tabstop>lineEdit92</tabstop>
   <tabstop>lineEdit13</tabstop>
   <tabstop>lineEdit23</tabstop>
   <tabstop>lineEdit33</tabstop>
@@ -1530,6 +1620,7 @@
   <tabstop>lineEdit63</tabstop>
   <tabstop>lineEdit73</tabstop>
   <tabstop>lineEdit83</tabstop>
+  <tabstop>lineEdit93</tabstop>
   <tabstop>lineEdit14</tabstop>
   <tabstop>lineEdit24</tabstop>
   <tabstop>lineEdit34</tabstop>
@@ -1538,6 +1629,7 @@
   <tabstop>lineEdit64</tabstop>
   <tabstop>lineEdit74</tabstop>
   <tabstop>lineEdit84</tabstop>
+  <tabstop>lineEdit94</tabstop>
   <tabstop>lineEdit15</tabstop>
   <tabstop>lineEdit25</tabstop>
   <tabstop>lineEdit35</tabstop>
@@ -1546,6 +1638,7 @@
   <tabstop>lineEdit65</tabstop>
   <tabstop>lineEdit75</tabstop>
   <tabstop>lineEdit85</tabstop>
+  <tabstop>lineEdit95</tabstop>
   <tabstop>lineEdit16</tabstop>
   <tabstop>lineEdit26</tabstop>
   <tabstop>lineEdit36</tabstop>
@@ -1554,6 +1647,7 @@
   <tabstop>lineEdit66</tabstop>
   <tabstop>lineEdit76</tabstop>
   <tabstop>lineEdit86</tabstop>
+  <tabstop>lineEdit96</tabstop>
   <tabstop>lineEdit17</tabstop>
   <tabstop>lineEdit27</tabstop>
   <tabstop>lineEdit37</tabstop>
@@ -1562,14 +1656,30 @@
   <tabstop>lineEdit67</tabstop>
   <tabstop>lineEdit77</tabstop>
   <tabstop>lineEdit87</tabstop>
+  <tabstop>lineEdit97</tabstop>
   <tabstop>lineEditK</tabstop>
   <tabstop>pBtnUpdate</tabstop>
+  <tabstop>pBtn1pVis</tabstop>
+  <tabstop>pBtn1rVis</tabstop>
+  <tabstop>pBtn2pVis</tabstop>
+  <tabstop>pBtn2rVis</tabstop>
+  <tabstop>pBtn3pVis</tabstop>
+  <tabstop>pBtn3rVis</tabstop>
   <tabstop>lineEditLsmB1</tabstop>
   <tabstop>lineEditLsmB0</tabstop>
   <tabstop>lineEditLsmFS</tabstop>
   <tabstop>lineEditLsmLine</tabstop>
   <tabstop>lineEditLsmHysteria</tabstop>
   <tabstop>lineEditLsmRepeat</tabstop>
+  <tabstop>lineEditBiPB1</tabstop>
+  <tabstop>lineEditBiPB0</tabstop>
+  <tabstop>lineEditBiPFS</tabstop>
+  <tabstop>lineEditBiPLine</tabstop>
+  <tabstop>lineEditBiPHysteria</tabstop>
+  <tabstop>lineEditBiPRepeat</tabstop>
+  <tabstop>gViewOrigin</tabstop>
+  <tabstop>gViewLsmBip</tabstop>
+  <tabstop>lineEdit</tabstop>
  </tabstops>
  <resources/>
  <connections/>

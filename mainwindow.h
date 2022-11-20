@@ -42,6 +42,7 @@ public:
     void Row6lEditTxt(const int &col, const QStringList &strList);
     void Row7lEditTxt(const int &col, const QStringList &strList);
     void Row8lEditTxt(const int &col, const QStringList &strList);
+    void Row9lEditTxt(const int &col, const QStringList &strList);
     void LineEditALLTXT(int &rJd, const int &col, const QVector<QStringList> strListVec);
 
     void GetAllLineEditTxt(QStringList& datalist);
@@ -55,6 +56,7 @@ private slots:
     void on_lineEdit61_textChanged(const QString &arg1);
     void on_lineEdit71_textChanged(const QString &arg1);
     void on_lineEdit81_textChanged(const QString &arg1);
+    void on_lineEdit91_textChanged(const QString &arg1);
 
     void on_lineEdit12_textChanged(const QString &arg1);
     void on_lineEdit22_textChanged(const QString &arg1);
@@ -64,6 +66,7 @@ private slots:
     void on_lineEdit62_textChanged(const QString &arg1);
     void on_lineEdit72_textChanged(const QString &arg1);
     void on_lineEdit82_textChanged(const QString &arg1);
+    void on_lineEdit92_textChanged(const QString &arg1);
 
     void on_lineEdit13_textChanged(const QString &arg1);
     void on_lineEdit23_textChanged(const QString &arg1);
@@ -73,6 +76,7 @@ private slots:
     void on_lineEdit63_textChanged(const QString &arg1);
     void on_lineEdit73_textChanged(const QString &arg1);
     void on_lineEdit83_textChanged(const QString &arg1);
+    void on_lineEdit93_textChanged(const QString &arg1);
 
     void on_lineEdit14_textChanged(const QString &arg1);
     void on_lineEdit24_textChanged(const QString &arg1);
@@ -82,6 +86,7 @@ private slots:
     void on_lineEdit64_textChanged(const QString &arg1);
     void on_lineEdit74_textChanged(const QString &arg1);
     void on_lineEdit84_textChanged(const QString &arg1);
+    void on_lineEdit94_textChanged(const QString &arg1);
 
     void on_lineEdit15_textChanged(const QString &arg1);
     void on_lineEdit25_textChanged(const QString &arg1);
@@ -91,6 +96,7 @@ private slots:
     void on_lineEdit65_textChanged(const QString &arg1);
     void on_lineEdit75_textChanged(const QString &arg1);
     void on_lineEdit85_textChanged(const QString &arg1);
+    void on_lineEdit95_textChanged(const QString &arg1);
 
     void on_lineEdit16_textChanged(const QString &arg1);
     void on_lineEdit26_textChanged(const QString &arg1);
@@ -100,6 +106,7 @@ private slots:
     void on_lineEdit66_textChanged(const QString &arg1);
     void on_lineEdit76_textChanged(const QString &arg1);
     void on_lineEdit86_textChanged(const QString &arg1);
+    void on_lineEdit96_textChanged(const QString &arg1);
 
     void on_lineEdit17_textChanged(const QString &arg1);
     void on_lineEdit27_textChanged(const QString &arg1);
@@ -109,6 +116,7 @@ private slots:
     void on_lineEdit67_textChanged(const QString &arg1);
     void on_lineEdit77_textChanged(const QString &arg1);
     void on_lineEdit87_textChanged(const QString &arg1);
+    void on_lineEdit97_textChanged(const QString &arg1);
 
     void on_pBtn1pVis_clicked();
     void on_pBtn1rVis_clicked();
