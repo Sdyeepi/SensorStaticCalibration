@@ -152,10 +152,10 @@ DataVec::DataVec(Data &a1p){                                                    
     d2r = nullptr;
     d3r = nullptr;
     points.resize(d1p->pairs());
-    points.push_back(d1p->pairs());
     QPoints.resize(1);
+    QPoints[0].resize(d1p->pairs());
     for(int i = 0;i < d1p->pairs();i++){
-        QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
+        QPoints[0][i] = QPointF(d1p->x[i], d1p->y[i]);
     }
 }//测试用
 DataVec::DataVec(Data &a1p, Data &a1r){                                             //proved
@@ -169,14 +169,14 @@ DataVec::DataVec(Data &a1p, Data &a1r){                                         
     Data *dnr = getMaxPairsDNR();
     if(dnr != d1p){
         points.resize(dnp->pairs() + dnr->pairs());
-        points.push_back(dnr->pairs());
     }
     else points.resize(dnp->pairs());
-    points.push_back(dnp->pairs());
     QPoints.resize(2);
-    for(int i = 0;i < d1p->pairs();i++){
-        QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
-        QPoints[1].append(QPointF(d1r->x[i], d1r->y[i]));
+    for(int i = 0;i < 2;i++){
+        QPoints[i].resize(select(i)->pairs());
+        for(int j = 0;j < select(i)->pairs();j++){
+            QPoints[i][j] = QPointF(select(i)->x[j], select(i)->y[j]);
+        }
     }
 }
 DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r){                       //proved
@@ -190,16 +190,14 @@ DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r){                   
     Data *dnr = getMaxPairsDNR();
     if(dnr != d1p){
         points.resize(dnp->pairs() + dnr->pairs());
-            points.push_back(dnr->pairs());
     }
     else points.resize(dnp->pairs());
-    points.push_back(dnp->pairs());
     QPoints.resize(4);
-    for(int i = 0;i < d1p->pairs();i++){
-        QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
-        QPoints[1].append(QPointF(d1r->x[i], d1r->y[i]));
-        QPoints[2].append(QPointF(d2p->x[i], d2p->y[i]));
-        QPoints[3].append(QPointF(d2r->x[i], d2r->y[i]));
+    for(int i = 0;i < 4;i++){
+        QPoints[i].resize(select(i)->pairs());
+        for(int j = 0;j < select(i)->pairs();j++){
+            QPoints[i][j] = QPointF(select(i)->x[j], select(i)->y[j]);
+        }
     }
 }
 DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r, Data &a3p, Data &a3r)  //proved
@@ -214,18 +212,14 @@ DataVec::DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r, Data &a3p, Data &a3
     Data *dnr = getMaxPairsDNR();
     if(dnr != d1p){
         points.resize(dnp->pairs() + dnr->pairs());
-        points.push_back(dnr->pairs());
     }
     else points.resize(dnp->pairs());
-    points.push_back(dnp->pairs());
     QPoints.resize(6);
-    for(int i = 0;i < d1p->pairs();i++){
-        QPoints[0].append(QPointF(d1p->x[i], d1p->y[i]));
-        QPoints[1].append(QPointF(d1r->x[i], d1r->y[i]));
-        QPoints[2].append(QPointF(d2p->x[i], d2p->y[i]));
-        QPoints[3].append(QPointF(d2r->x[i], d2r->y[i]));
-        QPoints[4].append(QPointF(d3p->x[i], d3p->y[i]));
-        QPoints[5].append(QPointF(d3r->x[i], d3r->y[i]));
+    for(int i = 0;i < 6;i++){
+        QPoints[i].resize(select(i)->pairs());
+        for(int j = 0;j < select(i)->pairs();j++){
+            QPoints[i][j] = QPointF(select(i)->x[j], select(i)->y[j]);
+        }
     }
 }
 
@@ -252,6 +246,24 @@ DataVec DataVec::operator=(DataVec &dv2)                                        
     points = dv2.points;
     QPoints = dv2.QPoints;
     return *this;
+}
+
+Data* DataVec::select(int n)
+{
+    switch (n) {
+    case 6:
+        return d3r;
+    case 5:
+        return d3p;
+    case 4:
+        return d2r;
+    case 3:
+        return d2p;
+    case 2:
+        return d1r;
+    default:
+        return d1p;
+    }
 }
 
 double DataVec::DataVecMax_X()
@@ -573,14 +585,14 @@ double DataVec::Line(double &b0, double &b1)                                    
 Data *DataVec::getMaxPairsDNP()                                                     //proved
 {
     if(d1p!=nullptr&&d2p!=nullptr&&d3p!=nullptr){
-            if(d1p->pairs()>d2p->pairs()&&d1p->pairs()>d3p->pairs())
+            if(d1p->pairs()>=d2p->pairs()&&d1p->pairs()>=d3p->pairs())
                 return d1p;
-            else if(d2p->pairs()>d1p->pairs()&&d2p->pairs()>d3p->pairs())
+            else if(d2p->pairs()>=d1p->pairs()&&d2p->pairs()>=d3p->pairs())
                 return d2p;
             else return d3p;
         }
     else if(d1p!=nullptr&&d2p!=nullptr){
-            if(d1p->pairs()>d2p->pairs())
+            if(d1p->pairs()>=d2p->pairs())
                 return d1p;
             else return d2p;
         }
@@ -590,14 +602,14 @@ Data *DataVec::getMaxPairsDNP()                                                 
 Data *DataVec::getMaxPairsDNR()                                                     //proved
 {
     if(d1r!=nullptr&&d2r!=nullptr&&d3r!=nullptr){
-            if(d1r->pairs()>d2r->pairs()&&d1r->pairs()>d3r->pairs())
+            if(d1r->pairs()>=d2r->pairs()&&d1r->pairs()>=d3r->pairs())
                 return d1r;
-            else if(d2r->pairs()>d1r->pairs()&&d2r->pairs()>d3r->pairs())
+            else if(d2r->pairs()>=d1r->pairs()&&d2r->pairs()>=d3r->pairs())
                 return d2r;
             else return d3r;
         }
     else if(d1r!=nullptr&&d2r!=nullptr){
-            if(d1r->pairs()>d2r->pairs())
+            if(d1r->pairs()>=d2r->pairs())
                 return d1r;
             else return d2r;
         }
@@ -722,9 +734,9 @@ double DataVec::getCountsPoints()                                               
     for(int j = 0;j < b;j++){
         if(rNum1[j] != 0)
             rNum1[j] = (rNum1[j] - sumr[j]) * (rNum1[j] - sumr[j]);
-        if(rNum1[j] != 0)
+        if(rNum2[j] != 0)
             rNum2[j] = (rNum2[j] - sumr[j]) * (rNum2[j] - sumr[j]);
-        if(rNum1[j] != 0)
+        if(rNum3[j] != 0)
             rNum3[j] = (rNum3[j] - sumr[j]) * (rNum3[j] - sumr[j]);
     }
     //以下是残差平方和计算，并存入pDevia，rDevia
@@ -846,9 +858,9 @@ double DataVec::getCountsPoints2()              //proved,两端点法采用
     for(int j = 0;j < b;j++){
         if(rNum1[j] != 0)
             rNum1[j] = (rNum1[j] - sumr[j]) * (rNum1[j] - sumr[j]);
-        if(rNum1[j] != 0)
+        if(rNum2[j] != 0)
             rNum2[j] = (rNum2[j] - sumr[j]) * (rNum2[j] - sumr[j]);
-        if(rNum1[j] != 0)
+        if(rNum3[j] != 0)
             rNum3[j] = (rNum3[j] - sumr[j]) * (rNum3[j] - sumr[j]);
     }
     //以下是残差平方和计算，并存入pDevia，rDevia
@@ -1116,7 +1128,7 @@ void DataVec::Lsm(QVector<double> &b){//这里会用到mainwindow定义的bs，�
         b[3] += d3r->sumy();
         pairsofAll += d3r->pairs();
     }
-    //此处b的数组分别为x^2和，y^2和，x和，y和
+    //此处b的数组分别为x^2和，xy和，x和，y和
     b[2] = b[2]/pairsofAll;//x均值
     b[3] = b[3]/pairsofAll;//y均值    ，准备工作完成，接下来是正式计算b0,b1的系数并存入
     b[1] = (b[1] - pairsofAll * b[2] * b[3])/(b[0] - pairsofAll * b[2] * b[2]);// 最小二乘斜率

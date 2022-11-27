@@ -47,6 +47,8 @@ public:
 
     void GetAllLineEditTxt(QStringList& datalist);
 
+    void ClearAll();//导入数据后，将之前的数据清空
+
 private slots:
     void on_lineEdit11_textChanged(const QString &arg1);
     void on_lineEdit21_textChanged(const QString &arg1);

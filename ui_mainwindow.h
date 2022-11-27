@@ -161,7 +161,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1192, 888);
+        MainWindow->resize(1192, 910);
         action_datain = new QAction(MainWindow);
         action_datain->setObjectName(QString::fromUtf8("action_datain"));
         action_dataout = new QAction(MainWindow);
@@ -170,7 +170,7 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         gBoxInput = new QGroupBox(centralwidget);
         gBoxInput->setObjectName(QString::fromUtf8("gBoxInput"));
-        gBoxInput->setGeometry(QRect(10, 0, 581, 371));
+        gBoxInput->setGeometry(QRect(10, 10, 581, 371));
         gBoxInput->setAlignment(Qt::AlignCenter);
         gridLayout_2 = new QGridLayout(gBoxInput);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
@@ -687,7 +687,7 @@ public:
 
         gBoxLsm = new QGroupBox(centralwidget);
         gBoxLsm->setObjectName(QString::fromUtf8("gBoxLsm"));
-        gBoxLsm->setGeometry(QRect(600, 0, 561, 221));
+        gBoxLsm->setGeometry(QRect(600, 10, 561, 221));
         gBoxLsm->setAlignment(Qt::AlignCenter);
         gridLayout = new QGridLayout(gBoxLsm);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
@@ -789,17 +789,17 @@ public:
 
         LBleCnFac = new QLabel(centralwidget);
         LBleCnFac->setObjectName(QString::fromUtf8("LBleCnFac"));
-        LBleCnFac->setGeometry(QRect(30, 410, 81, 29));
+        LBleCnFac->setGeometry(QRect(30, 420, 81, 29));
         pBtnUpdate = new QPushButton(centralwidget);
         pBtnUpdate->setObjectName(QString::fromUtf8("pBtnUpdate"));
-        pBtnUpdate->setGeometry(QRect(490, 410, 99, 29));
+        pBtnUpdate->setGeometry(QRect(490, 420, 99, 29));
         lineEditK = new QLineEdit(centralwidget);
         lineEditK->setObjectName(QString::fromUtf8("lineEditK"));
-        lineEditK->setGeometry(QRect(120, 410, 221, 25));
+        lineEditK->setGeometry(QRect(120, 420, 221, 25));
         lineEditK->setAlignment(Qt::AlignCenter);
         gBoxBiPoint = new QGroupBox(centralwidget);
         gBoxBiPoint->setObjectName(QString::fromUtf8("gBoxBiPoint"));
-        gBoxBiPoint->setGeometry(QRect(600, 220, 561, 221));
+        gBoxBiPoint->setGeometry(QRect(600, 230, 561, 221));
         gBoxBiPoint->setAlignment(Qt::AlignCenter);
         gridLayout_3 = new QGridLayout(gBoxBiPoint);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
@@ -901,36 +901,36 @@ public:
 
         gViewOrigin = new QtCharts::QChartView(centralwidget);
         gViewOrigin->setObjectName(QString::fromUtf8("gViewOrigin"));
-        gViewOrigin->setGeometry(QRect(20, 450, 571, 351));
+        gViewOrigin->setGeometry(QRect(20, 460, 571, 351));
         lineEdit = new QLineEdit(centralwidget);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
         lineEdit->setEnabled(true);
-        lineEdit->setGeometry(QRect(210, 810, 771, 25));
+        lineEdit->setGeometry(QRect(210, 820, 771, 25));
         lineEdit->setInputMask(QString::fromUtf8(""));
         lineEdit->setText(QString::fromUtf8("\344\273\243\347\240\201\350\247\201\346\234\254\344\272\272\351\241\271\347\233\256\345\234\260\345\235\200    https://github.com/Sdyeepi/SensorStaticCalibration"));
         lineEdit->setAlignment(Qt::AlignCenter);
         lineEdit->setReadOnly(true);
         gViewLsmBip = new QtCharts::QChartView(centralwidget);
         gViewLsmBip->setObjectName(QString::fromUtf8("gViewLsmBip"));
-        gViewLsmBip->setGeometry(QRect(600, 450, 571, 351));
+        gViewLsmBip->setGeometry(QRect(600, 460, 571, 351));
         pBtn1pVis = new QPushButton(centralwidget);
         pBtn1pVis->setObjectName(QString::fromUtf8("pBtn1pVis"));
-        pBtn1pVis->setGeometry(QRect(20, 370, 71, 29));
+        pBtn1pVis->setGeometry(QRect(20, 380, 71, 29));
         pBtn1rVis = new QPushButton(centralwidget);
         pBtn1rVis->setObjectName(QString::fromUtf8("pBtn1rVis"));
-        pBtn1rVis->setGeometry(QRect(120, 370, 71, 29));
+        pBtn1rVis->setGeometry(QRect(120, 380, 71, 29));
         pBtn2pVis = new QPushButton(centralwidget);
         pBtn2pVis->setObjectName(QString::fromUtf8("pBtn2pVis"));
-        pBtn2pVis->setGeometry(QRect(220, 370, 71, 29));
+        pBtn2pVis->setGeometry(QRect(220, 380, 71, 29));
         pBtn2rVis = new QPushButton(centralwidget);
         pBtn2rVis->setObjectName(QString::fromUtf8("pBtn2rVis"));
-        pBtn2rVis->setGeometry(QRect(320, 370, 71, 29));
+        pBtn2rVis->setGeometry(QRect(320, 380, 71, 29));
         pBtn3pVis = new QPushButton(centralwidget);
         pBtn3pVis->setObjectName(QString::fromUtf8("pBtn3pVis"));
-        pBtn3pVis->setGeometry(QRect(420, 370, 71, 29));
+        pBtn3pVis->setGeometry(QRect(420, 380, 71, 29));
         pBtn3rVis = new QPushButton(centralwidget);
         pBtn3rVis->setObjectName(QString::fromUtf8("pBtn3rVis"));
-        pBtn3rVis->setGeometry(QRect(520, 370, 71, 29));
+        pBtn3rVis->setGeometry(QRect(520, 380, 71, 29));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -1050,14 +1050,14 @@ public:
         gBoxInput->setTitle(QCoreApplication::translate("MainWindow", "\350\276\223\345\205\245\346\225\260\346\215\256\357\274\210\350\257\267\345\210\207\346\215\242\350\213\261\346\226\207\350\276\223\345\205\245\346\263\225\357\274\214\344\270\224\345\217\252\350\276\223\345\205\245\346\225\260\345\255\227\344\270\216\345\260\217\346\225\260\347\202\271\357\274\211", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "\347\254\254\344\272\214\346\254\241", nullptr));
         label_1->setText(QCoreApplication::translate("MainWindow", "\347\254\254\344\270\200\346\254\241", nullptr));
-        label_r3->setText(QCoreApplication::translate("MainWindow", "\345\233\236\347\250\213", nullptr));
-        label_p1->setText(QCoreApplication::translate("MainWindow", "\346\255\243\347\250\213", nullptr));
-        labelx->setText(QCoreApplication::translate("MainWindow", "\350\276\223\345\205\245", nullptr));
-        label_r1->setText(QCoreApplication::translate("MainWindow", "\345\233\236\347\250\213", nullptr));
-        label_p3->setText(QCoreApplication::translate("MainWindow", "\346\255\243\347\250\213", nullptr));
+        label_r3->setText(QCoreApplication::translate("MainWindow", "\345\233\236\347\250\213/mV", nullptr));
+        label_p1->setText(QCoreApplication::translate("MainWindow", "\346\255\243\347\250\213/mV", nullptr));
+        labelx->setText(QCoreApplication::translate("MainWindow", "\350\276\223\345\205\245/MPa", nullptr));
+        label_r1->setText(QCoreApplication::translate("MainWindow", "\345\233\236\347\250\213/mV", nullptr));
+        label_p3->setText(QCoreApplication::translate("MainWindow", "\346\255\243\347\250\213/mV", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "\347\254\254\344\270\211\346\254\241", nullptr));
-        label_r2->setText(QCoreApplication::translate("MainWindow", "\345\233\236\347\250\213", nullptr));
-        label_p2->setText(QCoreApplication::translate("MainWindow", "\346\255\243\347\250\213", nullptr));
+        label_r2->setText(QCoreApplication::translate("MainWindow", "\345\233\236\347\250\213/mV", nullptr));
+        label_p2->setText(QCoreApplication::translate("MainWindow", "\346\255\243\347\250\213/mV", nullptr));
         gBoxLsm->setTitle(QCoreApplication::translate("MainWindow", "\346\234\200\345\260\217\344\272\214\344\271\230\346\263\225", nullptr));
         LBleLsmX->setText(QCoreApplication::translate("MainWindow", "x   +", nullptr));
         LBleLsmFullScale->setText(QCoreApplication::translate("MainWindow", "\346\273\241\351\207\217\347\250\213\350\276\223\345\207\272\357\274\232    YFS =", nullptr));

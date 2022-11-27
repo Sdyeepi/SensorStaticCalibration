@@ -351,6 +351,64 @@ void MainWindow::GetAllLineEditTxt(QStringList &datalist)
     datalist<<"重复性: "<<ui->lineEditBiPRepeat->text()<<"%\n";
 }
 
+void MainWindow::ClearAll()
+{
+    ui->lineEdit11->setText("");
+    ui->lineEdit12->setText("");
+    ui->lineEdit13->setText("");
+    ui->lineEdit14->setText("");
+    ui->lineEdit15->setText("");
+    ui->lineEdit16->setText("");
+    ui->lineEdit21->setText("");
+    ui->lineEdit22->setText("");
+    ui->lineEdit23->setText("");
+    ui->lineEdit24->setText("");
+    ui->lineEdit25->setText("");
+    ui->lineEdit26->setText("");
+    ui->lineEdit31->setText("");
+    ui->lineEdit32->setText("");
+    ui->lineEdit33->setText("");
+    ui->lineEdit34->setText("");
+    ui->lineEdit35->setText("");
+    ui->lineEdit36->setText("");
+    ui->lineEdit41->setText("");
+    ui->lineEdit42->setText("");
+    ui->lineEdit43->setText("");
+    ui->lineEdit44->setText("");
+    ui->lineEdit45->setText("");
+    ui->lineEdit46->setText("");
+    ui->lineEdit51->setText("");
+    ui->lineEdit52->setText("");
+    ui->lineEdit53->setText("");
+    ui->lineEdit54->setText("");
+    ui->lineEdit55->setText("");
+    ui->lineEdit56->setText("");
+    ui->lineEdit61->setText("");
+    ui->lineEdit62->setText("");
+    ui->lineEdit63->setText("");
+    ui->lineEdit64->setText("");
+    ui->lineEdit65->setText("");
+    ui->lineEdit66->setText("");
+    ui->lineEdit71->setText("");
+    ui->lineEdit72->setText("");
+    ui->lineEdit73->setText("");
+    ui->lineEdit74->setText("");
+    ui->lineEdit75->setText("");
+    ui->lineEdit76->setText("");
+    ui->lineEdit81->setText("");
+    ui->lineEdit82->setText("");
+    ui->lineEdit83->setText("");
+    ui->lineEdit84->setText("");
+    ui->lineEdit85->setText("");
+    ui->lineEdit86->setText("");
+    ui->lineEdit91->setText("");
+    ui->lineEdit92->setText("");
+    ui->lineEdit93->setText("");
+    ui->lineEdit94->setText("");
+    ui->lineEdit95->setText("");
+    ui->lineEdit96->setText("");
+}
+
 
 //9,后面的什么insert方法早已不用，故不需要那么做，但懒得删了。版本只改了数字代表行数
 void MainWindow::on_lineEdit11_textChanged(const QString &arg1)
@@ -690,6 +748,7 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
 
 void MainWindow::on_Menu1_action_datain_clicked()
 {
+    ClearAll();
     QString path = QDir::currentPath();
     QString filter = "文本(*.txt *.md);;CSV文件(*.csv);;全部(*.*)";
     QString fname = QFileDialog::getOpenFileName(this, "查找文件路径", path, filter);

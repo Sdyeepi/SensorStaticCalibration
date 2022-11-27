@@ -40,7 +40,7 @@ public:
     Data *d2r;
     Data *d3p;
     Data *d3r;
-    QVector<double> points;//存储标定点(以x定义下的每一个)循环次数和两个特殊int转double数据,最后两个为dnp，dnr的pairs（）
+    QVector<double> points;//存储标定点(以x定义下的每一个)循环次数
     QVector<QVector<QPointF>> QPoints;//将数对转化为坐标点，二维容器，最上层存放了各个队列对应的点集，最内层为点集的点。
                                       //QPointF[0]为d1p，1 d1r，2 d2p，3 d2r，4 d3p，5 d3r。若后面的队列有的话，没有队列则也没有相应的QPointF[i]
     DataVec();
@@ -50,6 +50,7 @@ public:
     DataVec(Data &a1p, Data &a1r, Data &a2p, Data &a2r, Data &a3p, Data &a3r);
     DataVec(DataVec &dv1);
     DataVec operator=(DataVec &dv2);
+    Data* select(int n);
     double DataVecMax_X();
     double DataVecMin_X();
     double DataVecMax_Y();//暂时不想实现
