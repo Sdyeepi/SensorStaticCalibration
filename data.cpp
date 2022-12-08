@@ -278,7 +278,7 @@ double DataVec::DataVecMin_X()
 
 double DataVec::fullScale(double &b1)                                               //proved,算法需要改，d1p（输入列和第一列）的自变量量程不一定最大
 {
-    return d1p->range_x() * b1 ;
+    return qAbs(d1p->range_x() * b1) ;
 }
 
 double DataVec::predict_y(double &b0, double &b1, double x)

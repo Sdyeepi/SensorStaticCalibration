@@ -698,22 +698,22 @@ void MainWindow::on_pBtnUpdate_clicked() //作为更新键的slot
     DataVec dv(Dy1p);
     SeriesVec.resize(1);
     //在测试时发现删除某列第一行并不能让这列全部失效，这是因为Data对象的创建中，会忽略不匹配成对的数对，而原第1行的数字会被第2行的数字对替代
-    if((Dy1p.y[0]!=NULL)&&(Dy1r.y[0]!=NULL)&&(Dy2p.y[0]!=NULL)&&(Dy2r.y[0]!=NULL)&&(Dy3p.y[0]!=NULL)&&(Dy3r.y[0]!=NULL)){
+    if((&Dy1p.y[0]!=nullptr)&&(&Dy1r.y[0]!=nullptr)&&(&Dy2p.y[0]!=nullptr)&&(&Dy2r.y[0]!=nullptr)&&(&Dy3p.y[0]!=nullptr)&&(&Dy3r.y[0]!=nullptr)){
         DataVec dv6(Dy1p, Dy1r, Dy2p, Dy2r, Dy3p, Dy3r);
         dv = dv6;
         SeriesVec.resize(6);
     }
-    else if((Dy1p.y[0]!=NULL)&&(Dy1r.y[0]!=NULL)&&(Dy2p.y[0]!=NULL)&&(Dy2r.y[0]!=NULL)){
+    else if((&Dy1p.y[0]!=nullptr)&&(&Dy1r.y[0]!=nullptr)&&(&Dy2p.y[0]!=nullptr)&&(&Dy2r.y[0]!=nullptr)){
         DataVec dv4(Dy1p, Dy1r, Dy2p, Dy2r);
         dv = dv4;
         SeriesVec.resize(4);
     }
-    else if((Dy1p.y[0]!=NULL)&&(Dy1r.y[0]!=NULL)){
+    else if((&Dy1p.y[0]!=nullptr)&&(&Dy1r.y[0]!=nullptr)){
         DataVec dv2(Dy1p, Dy1r);
         dv = dv2;
         SeriesVec.resize(2);
     }
-    else if(Dy1p.y[0]==NULL){
+    else if(&Dy1p.y[0]==nullptr){
         SeriesVec.resize(0);
     }
     //此处应该还得有添加DataVec dv的QPointF点位进入QChartView
